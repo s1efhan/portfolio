@@ -1,0 +1,58 @@
+/* Standard-Stile für das Navigationsmenü */
+nav {
+    min-height: 15vh;
+    background-color: var(--background-color);
+    width: 100%;
+}
+
+nav ul {
+    width: 70%;
+    height:100%;
+    margin: 0 auto;
+    /* Zentriert das Menü horizontal */
+    padding: 0;
+    list-style-type: none;
+    /* Entfernt Aufzählungspunkte */
+    display: flex;
+    /* Verwendet Flexbox für die Anordnung der Elemente */
+    justify-content: space-around;
+    /* Teilt den verfügbaren Platz gleichmäßig auf */
+    align-items: center;
+}
+
+nav ul li {
+    height:100%;
+    text-align: center;
+    display:flex;
+    align-items: center;
+    flex: 1; /* Ändere width zu flex und füge flex: 1 hinzu */
+}
+
+nav a {
+    color: var(--secondary-color);
+    text-decoration: none;
+    padding: 10px;
+    display: inline-block; /* Ändere display zu inline-block */
+    /* Damit der gesamte Bereich anklickbar ist */
+    width: auto; /* Füge width: auto hinzu */
+}
+
+.menu_active a {
+    border-bottom: solid thin var(--primary-color);
+}
+
+.menu_inactive a {
+    color: var(--secondary-color);
+}
+
+nav a:hover {
+    color: var(--secondary-color);
+}
+
+nav ul li a:hover {
+    border-bottom: solid thin var(--primary-color);
+}
+
+nav a:active {
+    color: var(--secondary-color);
+}

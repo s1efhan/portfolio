@@ -1,0 +1,56 @@
+// style.scss
+@import'./colors.scss';
+@import'./darkmode.scss';
+@import'partials/_footer.scss';
+@import'partials/_menu.scss';
+@import'partials/_main.scss';
+@import'partials/_login.scss';
+
+:root {
+ font-family: sans-serif;
+ font-weight:600;
+ color: var(--script-color);
+  background-color: var(--background-color);
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+
+body,
+html {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+}
+
+a {
+  text-decoration: none;
+  cursor: pointer;
+}
+
+ul,
+ol {
+  text-decoration: none;
+  list-style-type: none;
+}
+
+a:hover {
+  color: var(--script-highlight-color);
+}
+
+main {
+  flex: 1;
+}
+
+#app {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}

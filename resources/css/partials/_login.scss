@@ -1,0 +1,77 @@
+
+  /* Stile für den Container */
+  .login-container {
+    background-color: var(--background-color);
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center; /* Zentriert den Text (und den Login-Button) */
+  }
+
+  /* Stile für das Formular */
+  .login-form {
+    background-color: var(--background-color);
+    border-radius: 15px;
+    padding: 25px;
+    min-width: 30%;
+    max-width: 50%;
+    border: solid var(--primary-color) thin;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  /* Stile für die Legende */
+  .login-form legend {
+    font-weight: bold;
+    margin-bottom: 15px;
+    text-align: center;
+    width: 100%;
+    color: var(--script-color);
+  }
+
+  /* Stile für die Beschriftungen */
+  .login-form label {
+    display: block;
+    margin-bottom: 10px;
+    color: var(--secondary-color);
+  }
+
+  /* Stile für die Eingabefelder */
+  .login-form input[type="password"] {
+    width: calc(100% - 20px);
+    /* Berücksichtigt die Padding */
+    padding: 10px;
+    border: none;
+    border-radius: 3px;
+    font-size: 1rem;
+    color: var(--background-color);
+    background-color: var(--script-color);
+  }
+
+  /* Stile für den Login-Button */
+  .login-form button[type="submit"] {
+    background-color: var(--primary-color);
+    color: var(--background-color);
+    border: solid thin var(--primary-color);
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 15px; /* Abstand zum vorherigen Element */
+  }
+
+  .login-form button[type="submit"]:hover {
+    background-color: var(--background-color);
+    color: var(--primary-color);
+    border-color: var(--primary-color)
+  }
+
+  /* Stile für die Fehlermeldung */
+  .error-message {
+    color: var(--primary-color);
+    margin-top: 10px;
+  }

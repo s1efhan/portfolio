@@ -1,0 +1,14 @@
+main {
+    background-color: var(--background-color);
+    color: var(--script-color)
+}
+
+main a {
+    color: var(--script-color-highlight);
+    border-bottom: solid thin;
+}
+
+main a:active,
+main a:hover {
+    border-color: var(--script-color-highlight)
+}
