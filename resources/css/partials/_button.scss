@@ -1,0 +1,26 @@
+button {
+    background-color: var(--primary-color);
+    color: var(--background-color);
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    color: var(--script-color);
+    margin-top: 15px; /* Abstand zum vorherigen Element */
+}
+.primary_button {
+background-color: var(--primary-color);
+color: var(--secondary-color);
+}
+
+.secondary_button {
+    background-color: var(--script-color);
+    color: var(--background-color);
+}
+
+.accent_button {
+    background-color: var(--secondary-color);
+    color: var(--script-color);
+}

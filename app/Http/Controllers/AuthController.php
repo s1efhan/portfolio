@@ -1,29 +1,28 @@
 <?php
-// app/Http/Controllers/AuthController.php
 
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
     public function login(Request $request)
     {
-        $usersJson = file_get_contents(storage_path('pw.json'));
-        $users = json_decode($usersJson, true);
 
-        $credentials = $request->only('name', 'password');
+        
+        $credentials = $request->only('email', 'password');
 
-        foreach ($users['users'] as $user) {
-            if ($user['name'] === $credentials['name'] && Hash::check($credentials['password'], $user['password'])) {
-                // Authentifizierung erfolgreich
-                return response()->json(['message' => 'Login erfolgreich'], 200);
-            }
+         // Debugging: E-Mail und Passwort in der Konsole ausgeben
+         \Log::info('E-Mail: ' . $credentials['email']);
+         \Log::info('Passwort: ' . $credentials['password']);
+         
+        if (Auth::attempt($credentials)) {
+            // Authentifizierung erfolgreich
+            return response()->json(['message' => 'Login erfolgreich'], 200);
         }
 
         // Authentifizierung fehlgeschlagen
         return response()->json(['error' => 'Ungültige Anmeldeinformationen'], 401);
     }
 }
-

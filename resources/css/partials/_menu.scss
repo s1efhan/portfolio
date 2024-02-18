@@ -38,7 +38,7 @@ nav a {
 }
 
 .menu_active a {
-    border-bottom: solid thin var(--primary-color);
+   color:var(--script-color);
 }
 
 .menu_inactive a {
@@ -50,7 +50,7 @@ nav a:hover {
 }
 
 nav ul li a:hover {
-    border-bottom: solid thin var(--primary-color);
+    color:var(--script-color);
 }
 
 nav a:active {

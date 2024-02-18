@@ -5,18 +5,37 @@
 @import'partials/_menu.scss';
 @import'partials/_main.scss';
 @import'partials/_login.scss';
+@import'partials/_button.scss';
 
+@font-face {
+  font-family: 'Nohemi-Regular';
+  src: url('../fonts/Nohemi/Nohemi-Regular.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Nohemi-Bold';
+  src: url('../fonts/Nohemi/Nohemi-Bold.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Nohemi-Thin';
+  src: url('../fonts/Nohemi/Nohemi-Thin.ttf') format('truetype');
+}
+
+h1 {
+  color: var(--primary-color);
+  font-family: 'Nohemi-Bold', sans-serif;
+}
+.darkmode h1 {background-color: var(--background-color);}
 :root {
- font-family: sans-serif;
- font-weight:600;
- color: var(--script-color);
+  font-family: 'Nohemi-Regular', sans-serif;
+  color: var(--script-color);
   background-color: var(--background-color);
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-
 
 body,
 html {

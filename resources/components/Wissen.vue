@@ -13,6 +13,11 @@ import Breadcrumps from './Breadcrumps.vue';
                 <li>mit Liste</li>
         </ul>
         <p>und weiteren Worten und Absätzen</p>
+        <button class="primary_button">Button</button>
+        <br>
+        <button class="secondary_button">Button</button>
+        <br>
+        <button class="accent_button">Button</button>
 </section>
 </main>
     </template>

@@ -3,7 +3,7 @@
         <form class="login-form" @submit.prevent="login">
             <legend :style="legendStyle" v-html="legend"></legend>
 
-            <input id="name" type="hidden" v-model="name">
+            <input id="email" type="hidden" v-model="email">
             <label for="password">Passwort:</label>
             <input id="password" type="password" v-model="password">
             <button type="submit">Login</button>
@@ -18,7 +18,7 @@ import axios from 'axios';
 export default {
     data() {
         return {
-            name: 'root',
+            email: 'stefan.theissen@mail.de',
             password: '',
             legend: 'Privatwebsite! <br> Durch Passwort geschützt'
         };
@@ -26,7 +26,7 @@ export default {
     methods: {
     login() {
         axios.post('/api/login', {
-            name: this.name,
+            email: this.email,
             password: this.password
         })
         .then(response => {

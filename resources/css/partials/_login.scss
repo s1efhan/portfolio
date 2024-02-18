@@ -51,25 +51,6 @@
     background-color: var(--script-color);
   }
 
-  /* Stile für den Login-Button */
-  .login-form button[type="submit"] {
-    background-color: var(--primary-color);
-    color: var(--background-color);
-    border: solid thin var(--primary-color);
-    padding: 10px 20px;
-    border-radius: 5px;
-    font-size: 1rem;
-    font-weight: 600;
-    cursor: pointer;
-    margin-top: 15px; /* Abstand zum vorherigen Element */
-  }
-
-  .login-form button[type="submit"]:hover {
-    background-color: var(--background-color);
-    color: var(--primary-color);
-    border-color: var(--primary-color)
-  }
-
   /* Stile für die Fehlermeldung */
   .error-message {
     color: var(--primary-color);
