@@ -22,7 +22,7 @@ onMounted(() => {
 const loggedIn = ref(false);
 
 onMounted(() => {
-  console.log(sessionStorage.getItem('loggedIn'))
+
     if (sessionStorage.getItem('loggedIn')) {
         loggedIn.value = true;
     }

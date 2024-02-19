@@ -6,6 +6,7 @@
 @import'partials/_main.scss';
 @import'partials/_login.scss';
 @import'partials/_button.scss';
+@import'partials/_form.scss';
 
 @font-face {
   font-family: 'Nohemi-Regular';
@@ -72,4 +73,28 @@ main {
   flex: 1;
   display: flex;
   flex-direction: column;
+  background-color: var(--background-color);
 }
+
+main {display: flex;
+  flex-direction: column;
+  align-items: center;}
+  main section {
+    width: 90%; /* Streckt den Abschnitt über die gesamte Breite */
+    display: flex; /* Flex-Display verwenden */
+    flex-direction: column; /* In Spaltenrichtung anordnen */
+ 
+  }
+  header {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--background-color);
+  }
+  header > * {
+    margin-left: 5%;
+  }
+  header a {
+    color: var(--script-color);
+    text-decoration:underline;
+  }
+  header a:hover {color: var(--script-color); }

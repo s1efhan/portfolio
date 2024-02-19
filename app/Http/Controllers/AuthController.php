@@ -12,10 +12,6 @@ class AuthController extends Controller
 
         
         $credentials = $request->only('email', 'password');
-
-         // Debugging: E-Mail und Passwort in der Konsole ausgeben
-         \Log::info('E-Mail: ' . $credentials['email']);
-         \Log::info('Passwort: ' . $credentials['password']);
          
         if (Auth::attempt($credentials)) {
             // Authentifizierung erfolgreich

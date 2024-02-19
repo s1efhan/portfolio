@@ -1,11 +1,12 @@
 footer a {
-    color:var(--secondary-color);
+    color:var(--script-color);
 }
 footer {
     background-color: var(--background-color);
     text-align: center;
+    color:var(--script-color);
   }
 
   footer a:hover{
-    color:var(--secondary-color);
+    color:var(--script-color);
   }

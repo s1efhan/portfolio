@@ -8,6 +8,7 @@ button {
     font-weight: 600;
     cursor: pointer;
     color: var(--script-color);
+    max-width: 200px;
     margin-top: 15px; /* Abstand zum vorherigen Element */
 }
 .primary_button {
