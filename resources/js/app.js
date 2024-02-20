@@ -2,7 +2,6 @@
 import('./bootstrap.js');
 
 import {createApp} from 'vue'
-
 import App from '../App.vue';
 import router from "./router.js";
 // Vor jedem Routing prüfen, ob die Seite /impressum ist und das Meta-Tag hinzufügen
@@ -25,5 +24,4 @@ router.beforeEach((to, from, next) => {
 
   next();
 });
-
 createApp(App).use(router).mount('#app');

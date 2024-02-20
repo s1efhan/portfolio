@@ -1,6 +1,3 @@
-
-
-
 /* Stile für das Formular */
 .login-form {
   background-color: var(--background-color);
@@ -8,15 +5,18 @@
   border-color: var(--primary-color);
 
 }
+
 /* Stile für den Container */
 .form-container {
   display: flex;
   justify-content: center;
   align-items: center;
   text-align: center;
-  height: 100%; width: 100%;
+  height: 100%;
+  width: 100%;
   /* Zentriert den Text (und den Login-Button) */
 }
+
 /* Stile für die Legende */
 .login-form legend {
   color: var(--script-color);
@@ -44,3 +44,9 @@ form label {
   color: var(--primary-color);
   margin-top: 10px;
 }
+
+.ql-stroke,
+  .ql-fill, .ql-picker span, .ql-snow .ql-picker.ql-expanded .ql-picker-label{
+    stroke:  var(--secondary-color) !important;
+    color: var(--secondary-color)  !important;
+  }

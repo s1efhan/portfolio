@@ -1,3 +1,7 @@
+<script setup>
+import { QuillEditor } from '@vueup/vue-quill'
+import '@vueup/vue-quill/dist/vue-quill.snow.css';
+</script>
 <template>
     <section class="addArticle">
         <h2>Artikel hinzufügen</h2>
@@ -14,13 +18,16 @@
                 </select>
                 <label for="">Thema:</label>
                 <select id="topic_id" v-model="topic_id">
-    <option v-for="knowledge_topic in knowledge_topics" :key="knowledge_topic.id"
-        :value="knowledge_topic.id">
-        {{ knowledge_topic.topic_name }}
-    </option>
-</select>
+                    <option v-for="knowledge_topic in knowledge_topics" :key="knowledge_topic.id"
+                        :value="knowledge_topic.id">
+                        {{ knowledge_topic.topic_name }}
+                    </option>
+                </select>
                 <label for="title_img">Titelbild:</label>
                 <input id="title_img" type="file" accept=".png, .jpg, .jpeg" @change="handleFileUpload">
+                <label for="content">Inhalt des Artikels:</label>
+                <QuillEditor :toolbar="toolbarOptions" theme="snow" v-model:content="content" contentType="html" />
+
                 <button class="secondary_button" type="submit">Speichern</button>
             </form>
         </div>
@@ -64,12 +71,25 @@ import axios from 'axios';
 export default {
     data() {
         return {
+            toolbarOptions: [
+            [{ 'header': [1, 2, 3, 4, false] }],
+                ['bold', 'italic', 'underline'],
+                [{ 'list': 'ordered' }, { 'list': 'bullet' }],
+                
+                [{ 'indent': '-1' }, { 'indent': '+1' }],
+          
+        
+        
+                [{ 'align': [] }],
+                ['link', 'image', 'video'],
+                ['clean']
+            ],
             title: '',
             description: '',
             author: '',
             users: [],
             title_img: null,
-            content: '',
+            content: 'lol',
             length: '',
             topic_id: '',
             topic_name: '',
@@ -146,28 +166,28 @@ export default {
                 });
         },
         fetchCategories() {
-    axios.get('/api/knowledge_categories')
-        .then(response => {
-            this.knowledge_categories = response.data;
-            if (this.knowledge_categories.length > 0) {
-                this.knowledge_category_id = this.knowledge_categories[0].id;
-            }
-        })
-        .catch(error => {
-            console.error('Error fetching knowledge categories', error);
-        });
-},fetchTopics() {
-    axios.get('/api/knowledge_topic')
-        .then(response => {
-            this.knowledge_topics = response.data;
-            if (this.knowledge_topics.length > 0) {
-                this.topic_id = this.knowledge_topics[0].id;
-            }
-        })
-        .catch(error => {
-            console.error('Error fetching knowledge categories', error);
-        });
-},
+            axios.get('/api/knowledge_categories')
+                .then(response => {
+                    this.knowledge_categories = response.data;
+                    if (this.knowledge_categories.length > 0) {
+                        this.knowledge_category_id = this.knowledge_categories[0].id;
+                    }
+                })
+                .catch(error => {
+                    console.error('Error fetching knowledge categories', error);
+                });
+        }, fetchTopics() {
+            axios.get('/api/knowledge_topic')
+                .then(response => {
+                    this.knowledge_topics = response.data;
+                    if (this.knowledge_topics.length > 0) {
+                        this.topic_id = this.knowledge_topics[0].id;
+                    }
+                })
+                .catch(error => {
+                    console.error('Error fetching knowledge categories', error);
+                });
+        },
 
         addTopic() {
             axios.post('/api/knowledge_topic', {
