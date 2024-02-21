@@ -7,6 +7,9 @@ use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Http\Request;
 use App\Models\KnowledgeCategory;
 use App\Models\KnowledgeTopic;
+use App\Models\KnowledgeArticle;
+use Illuminate\Support\Facades\Storage;
+
 
 class ArticleController extends Controller
 {
@@ -15,6 +18,34 @@ class ArticleController extends Controller
         $KnowledgeCategories = KnowledgeCategory::select('id', 'name')->get();
         return response()->json($KnowledgeCategories);
     }
+    public function addArticle(Request $request)
+    {
+        // Validiere die Eingaben
+        $validatedData = $request->validate([
+            'title' => 'required|string|unique:knowledge_articles', // Eindeutigkeit von title überprüfen
+            'description' =>  'required|string|unique:knowledge_articles',
+            'author' => 'required|integer',
+            'topic_id' => 'required|exists:knowledge_topics,id',
+            'content' => 'required|string',
+            'length' => 'required|integer',
+            'title_img' => 'nullable|image|mimes:jpeg,png|max:5120', //Max 5MB, nur JPEG und PNG
+        ]);
+    
+        if ($request->hasFile('title_img')) {
+            // Datei hochladen und Originaldateinamen beibehalten
+            $path = $request->file('title_img')->store('uploads/title-img');
+    
+            // Pfad in die Validierungsdaten einfügen
+            $validatedData['title_img'] = $path;
+        }
+    
+        // Artikel erstellen
+        $article = KnowledgeArticle::create($validatedData);
+    
+        return response()->json(['message' => 'Artikel erfolgreich erstellt', 'article' => $article], 201);
+    }
+    
+
     public function fetch_topics()
     {
         $KnowledgeTopics = KnowledgeTopic::select('id', 'topic_name')->get();
@@ -50,14 +81,14 @@ class ArticleController extends Controller
             'topic_name' => 'required|string|max:255',
             'knowledge_category_id' => 'required|exists:knowledge_categories,id'
         ]);
-    
+
         // Neues Thema erstellen
         $topic = new KnowledgeTopic();
         $topic->topic_name = $request->input('topic_name');
         $topic->category_id = $request->input('knowledge_category_id'); // Use 'knowledge_category_id' here
         $topic->save();
-    
+
         return response()->json(['message' => 'Thema erfolgreich hinzugefügt'], 201);
     }
-    
+
 }

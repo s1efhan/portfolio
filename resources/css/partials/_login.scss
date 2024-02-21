@@ -1,31 +1,38 @@
 /* Stile für das Formular */
-.login-form {
-  background-color: var(--background-color);
+@media only screen and (min-width: 1024px) {
 
-  border-color: var(--primary-color);
+  .login-form {
+    background-color: var(--background-color);
+  
+    border-color: var(--primary-color);
+  
+  }
+  .form-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    height: 100%;
+    width: 100%;
+    /* Zentriert den Text (und den Login-Button) */
+  }
 
+  form label {
+    display: block;
+    margin-bottom: 10px;
+  }
+  .error-message {
+    margin-top: 10px;
+  }
 }
-
 /* Stile für den Container */
-.form-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  height: 100%;
-  width: 100%;
-  /* Zentriert den Text (und den Login-Button) */
-}
+
 
 /* Stile für die Legende */
 .login-form legend {
   color: var(--script-color);
 }
 
-form label {
-  display: block;
-  margin-bottom: 10px;
-}
 
 /* Stile für die Beschriftungen */
 .login-form label {
@@ -42,7 +49,6 @@ form label {
 /* Stile für die Fehlermeldung */
 .error-message {
   color: var(--primary-color);
-  margin-top: 10px;
 }
 
 .ql-stroke,

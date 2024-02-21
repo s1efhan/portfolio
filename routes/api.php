@@ -20,3 +20,4 @@ Route::get('/knowledge_categories', [ArticleController::class, 'fetch_categories
 Route::post('/knowledge_categories', [ArticleController::class, 'add_categories']);
 Route::post('/knowledge_topic', [ArticleController::class, 'add_topic']);
 Route::get('/knowledge_topic', [ArticleController::class, 'fetch_topics']);
+Route::post('/addArticle', [ArticleController::class, 'addArticle']);

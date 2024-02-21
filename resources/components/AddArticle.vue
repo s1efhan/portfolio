@@ -7,14 +7,14 @@ import '@vueup/vue-quill/dist/vue-quill.snow.css';
         <h2>Artikel hinzufügen</h2>
         <div class="form-container">
             <form class="addArticle-form" @submit.prevent="addArticle">
-                <legend :style="legendStyle" v-html="legend"></legend>
+                <legend :style="legendStyle" v-html="legendArticle"></legend>
                 <label for="description">Meta Title:</label>
                 <input id="title" type="text" v-model="title" placeholder="Max. 60 characters">
                 <label for="description">Meta Description:</label>
                 <input id="description" type="text" v-model="description" placeholder="Max. 160 characters">
                 <label for="">Author:</label>
                 <select id="author" v-model="author">
-                    <option v-for="user in users" :key="user.id" :value="user.name">{{ user.name }}</option>
+                    <option v-for="user in users" :key="user.id" :value="user.id">{{ user.name }}</option>
                 </select>
                 <label for="">Thema:</label>
                 <select id="topic_id" v-model="topic_id">
@@ -24,10 +24,12 @@ import '@vueup/vue-quill/dist/vue-quill.snow.css';
                     </option>
                 </select>
                 <label for="title_img">Titelbild:</label>
-                <input id="title_img" type="file" accept=".png, .jpg, .jpeg" @change="handleFileUpload">
+                <input id="title_img" type="file" accept=".png, .jpg, .jpeg" @change="handleFileChange">
                 <label for="content">Inhalt des Artikels:</label>
-                <QuillEditor :toolbar="toolbarOptions" theme="snow" v-model:content="content" contentType="html" />
-
+                <QuillEditor @input="updateLength" :toolbar="toolbarOptions" theme="snow" v-model:content="content"
+                    contentType="html" />
+                <label>Länge</label>
+                <input type="text" :value="length + ' Wörter'" readonly>
                 <button class="secondary_button" type="submit">Speichern</button>
             </form>
         </div>
@@ -72,25 +74,21 @@ export default {
     data() {
         return {
             toolbarOptions: [
-            [{ 'header': [1, 2, 3, 4, false] }],
+                [{ 'header': [1, 2, 3, 4, false] }],
                 ['bold', 'italic', 'underline'],
                 [{ 'list': 'ordered' }, { 'list': 'bullet' }],
-                
                 [{ 'indent': '-1' }, { 'indent': '+1' }],
-          
-        
-        
                 [{ 'align': [] }],
-                ['link', 'image', 'video'],
+                ['link', 'video'],
                 ['clean']
             ],
             title: '',
             description: '',
-            author: '',
+            author: null,
             users: [],
             title_img: null,
-            content: 'lol',
-            length: '',
+            content: '',
+            length: '0',
             topic_id: '',
             topic_name: '',
             knowledge_category_id: '',
@@ -111,55 +109,63 @@ export default {
         this.fetchTopics();
     },
     methods: {
-        addArticle() {
-            axios.post('/api/addArticle', {
-                title: this.title,
-                description: this.description,
-                author: this.author,
-                title_img: this.title_img,
-                content: this.content,
-                length: this.length,
-            })
-                .then(response => {
-                    //bei erfolg
-                    this.legendArticle = response.data.message
-                    console.log("Erfolgreich gespeichert!")
+        updateLength() {
+            // Berechnen Sie die Länge des Inhalts und aktualisieren Sie das length-Attribut
+            this.length = this.content.split(/\s+/).filter(word => word).length;
+        },
+        handleFileChange(event) {
+        this.title_img = event.target.files[0];
+    },
+    addArticle() {
+    // Erstellen Sie ein FormData-Objekt
+    let formData = new FormData();
 
-                })
-                .catch(error => {
-                    this.legendArticle = error.response.data.error
-                    this.legendStyle = 'color: var(--primary-color);';
-                });
-        }, handleFileUpload(event) {
-            const file = event.target.files[0];
-            const allowedTypes = ['image/png', 'image/jpeg'];
-            if (!allowedTypes.includes(file.type)) {
-                this.legendArticle = 'Nur PNG- und JPEG-Dateien sind erlaubt.';
-                this.legendStyle = 'color: var(--error-color);';
-                event.target.value = '';
-                return;
+    // Fügen Sie die Formulardaten hinzu
+    formData.append('title', this.title);
+    formData.append('description', this.description);
+    formData.append('author', this.author);
+    formData.append('topic_id', this.topic_id);
+    formData.append('title_img', this.title_img); // Fügen Sie das Bild hinzu
+    formData.append('content', this.content);
+    formData.append('length', this.length);
+
+    axios.post('/api/addArticle', formData, {
+        headers: {
+            'Content-Type': 'multipart/form-data' // Erforderlich für die Übertragung von Dateien
+        }
+    })
+    .then(response => {
+        // Bei Erfolg
+        this.legendArticle = response.data.message;
+        console.log("Erfolgreich gespeichert!");
+    })
+    .catch(error => {
+        if (error.response.status === 422) {
+            // Wenn die Validierung fehlschlägt, erhalten Sie die Fehlermeldungen im Fehlerantwortobjekt
+            let errors = error.response.data.errors;
+            let errorMessage = '';
+
+            // Durchlaufen Sie die Fehler und erstellen Sie eine Nachricht, die sie anzeigt
+            for (let key in errors) {
+                errorMessage += `${errors[key][0]}\n`;
             }
-            if (file.size > 5 * 1024 * 1024) { // Überprüfen Sie die Dateigröße (5 MB)
-                this.legendArticle = 'Die Dateigröße darf maximal 5 MB betragen.';
-                this.legendStyle = 'color: var(--error-color);';
-                event.target.value = '';
-                return;
-            }
-            this.title_img = file;
-        },
-        compressImage(imageFile) {
-            const options = {
-                maxSizeMB: 5,
-                maxWidthOrHeight: 1920,
-                useWebWorker: true
-            };
-            return imageCompression(imageFile, options);
-        },
+
+            // Fehlermeldung anzeigen
+            this.legendArticle = errorMessage;
+            this.legendStyle = 'color: var(--primary-color);';
+        } else {
+            // Wenn ein anderer Fehler auftritt, allgemeine Fehlermeldung anzeigen
+            this.legendArticle = 'Ein Fehler ist aufgetreten. Bitte versuchen Sie es erneut.';
+            this.legendStyle = 'color: var(--primary-color);';
+        }
+    });
+},
         fetchUsers() {
             axios.get('/api/users')
                 .then(response => {
                     this.users = response.data;
-                    this.author = this.users[0].name;
+                    this.author = this.users[0].id;
+                    console.log(this.author)
                 })
                 .catch(error => {
                     console.error('Error fetching users', error);
@@ -180,9 +186,8 @@ export default {
             axios.get('/api/knowledge_topic')
                 .then(response => {
                     this.knowledge_topics = response.data;
-                    if (this.knowledge_topics.length > 0) {
-                        this.topic_id = this.knowledge_topics[0].id;
-                    }
+                    this.topic_id = this.knowledge_topics[0].id;
+                    console.log(this.topic_id);
                 })
                 .catch(error => {
                     console.error('Error fetching knowledge categories', error);

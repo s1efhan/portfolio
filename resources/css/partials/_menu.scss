@@ -1,44 +1,57 @@
+@media only screen and (min-width: 1024px) {
+    nav {
+        width: 100%;
+        min-height: 15vh;
+    }
+    nav ul {
+        width: 70%;
+        height: 100%;
+        margin: 0 auto;
+        /* Zentriert das Menü horizontal */
+        padding: 0;
+        list-style-type: none;
+        /* Entfernt Aufzählungspunkte */
+        display: flex;
+        /* Verwendet Flexbox für die Anordnung der Elemente */
+        justify-content: space-around;
+        /* Teilt den verfügbaren Platz gleichmäßig auf */
+        align-items: center;
+    }
+
+    nav ul li {
+        height: 100%;
+        text-align: center;
+        display: flex;
+        align-items: center;
+        flex: 1;
+        /* Ändere width zu flex und füge flex: 1 hinzu */
+    }
+
+    nav a {
+        color: var(--secondary-color);
+        text-decoration: none;
+        padding: 10px;
+        display: inline-block;
+        /* Ändere display zu inline-block */
+        /* Damit der gesamte Bereich anklickbar ist */
+        width: auto;
+        /* Füge width: auto hinzu */
+    }
+}
+
 /* Standard-Stile für das Navigationsmenü */
 nav {
-    min-height: 15vh;
     background-color: var(--background-color);
-    width: 100%;
 }
 
-nav ul {
-    width: 70%;
-    height:100%;
-    margin: 0 auto;
-    /* Zentriert das Menü horizontal */
-    padding: 0;
-    list-style-type: none;
-    /* Entfernt Aufzählungspunkte */
-    display: flex;
-    /* Verwendet Flexbox für die Anordnung der Elemente */
-    justify-content: space-around;
-    /* Teilt den verfügbaren Platz gleichmäßig auf */
-    align-items: center;
-}
-
-nav ul li {
-    height:100%;
-    text-align: center;
-    display:flex;
-    align-items: center;
-    flex: 1; /* Ändere width zu flex und füge flex: 1 hinzu */
-}
 
 nav a {
     color: var(--secondary-color);
     text-decoration: none;
-    padding: 10px;
-    display: inline-block; /* Ändere display zu inline-block */
-    /* Damit der gesamte Bereich anklickbar ist */
-    width: auto; /* Füge width: auto hinzu */
 }
 
 .menu_active a {
-   color:var(--script-color);
+    color: var(--script-color);
 }
 
 .menu_inactive a {
@@ -50,7 +63,7 @@ nav a:hover {
 }
 
 nav ul li a:hover {
-    color:var(--script-color);
+    color: var(--script-color);
 }
 
 nav a:active {

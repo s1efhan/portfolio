@@ -1,17 +1,28 @@
-form {
-  border-radius: 15px;
-  padding: 25px;
+@media only screen and (min-width: 1024px) {
+  label {
+    width: 100%;
+    text-align: start;
+    margin: 20px;
+  }
+form {padding: 25px;
   min-width: 30%;
   max-width: 60%;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  border: solid thin;
+  align-items: center;}
+  form legend { margin-bottom: 15px;}
+
+  form input, form select { padding: 10px;
+    font-size: 1rem;
+    width: calc(100% - 20px);}
+}
+form {
+  border-radius: 15px;
+  border: solid;
 }
 
 form legend {
   font-weight: bold;
-  margin-bottom: 15px;
   text-align: center;
   width: 100%;
 }
@@ -20,19 +31,10 @@ form input,
 form select {
   border-radius: 3px;
   border: none;
-  padding: 10px;
-  font-size: 1rem;
-  width: calc(100% - 20px);
 }
 
 select,
 select:active {
   text-align: center;
   text-align-last: center;
-}
-
-label {
-  width: 100%;
-  text-align: start;
-  margin: 20px;
 }
