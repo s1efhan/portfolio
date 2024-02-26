@@ -15,18 +15,25 @@ button {
     border-radius: 5px;
     cursor: pointer;
     color: var(--script-color);
+    padding: 0.5em;
 }
 .primary_button {
 background-color: var(--primary-color);
 color: var(--secondary-color);
+margin-bottom: 1.5em;
+margin-top: 1.5em;
 }
 
 .secondary_button {
     background-color: var(--script-color);
     color: var(--background-color);
+    margin-bottom: 1.5em;
+    margin-top: 1.5em;
 }
 
 .accent_button {
     background-color: var(--secondary-color);
     color: var(--script-color);
+    margin-bottom: 1.5em;
+    margin-top: 1.5em;
 }

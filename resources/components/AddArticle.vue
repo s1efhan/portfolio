@@ -1,3 +1,4 @@
+<!-- AddArticle.vue -->
 <script setup>
 import { QuillEditor } from '@vueup/vue-quill'
 import '@vueup/vue-quill/dist/vue-quill.snow.css';
@@ -12,11 +13,11 @@ import '@vueup/vue-quill/dist/vue-quill.snow.css';
                 <input id="title" type="text" v-model="title" placeholder="Max. 60 characters">
                 <label for="description">Meta Description:</label>
                 <input id="description" type="text" v-model="description" placeholder="Max. 160 characters">
-                <label for="">Author:</label>
+                <label for="author">Author:</label>
                 <select id="author" v-model="author">
                     <option v-for="user in users" :key="user.id" :value="user.id">{{ user.name }}</option>
                 </select>
-                <label for="">Thema:</label>
+                <label for="topic_id">Thema:</label>
                 <select id="topic_id" v-model="topic_id">
                     <option v-for="knowledge_topic in knowledge_topics" :key="knowledge_topic.id"
                         :value="knowledge_topic.id">
@@ -25,11 +26,13 @@ import '@vueup/vue-quill/dist/vue-quill.snow.css';
                 </select>
                 <label for="title_img">Titelbild:</label>
                 <input id="title_img" type="file" accept=".png, .jpg, .jpeg" @change="handleFileChange">
-                <label for="content">Inhalt des Artikels:</label>
-                <QuillEditor @input="updateLength" :toolbar="toolbarOptions" theme="snow" v-model:content="content"
+                <label for="quill-editor">Inhalt des Artikels:</label><div id="quill-editor">
+               
+                <QuillEditor id="content" @input="updateLength" :toolbar="toolbarOptions" theme="snow" v-model:content="content"
                     contentType="html" />
-                <label>Länge</label>
-                <input type="text" :value="length + ' Wörter'" readonly>
+                    <label for="length">Länge</label>
+                <input id="length" type="text" :value="length + ' Wörter'" readonly>
+                </div>
                 <button class="secondary_button" type="submit">Speichern</button>
             </form>
         </div>
@@ -74,20 +77,15 @@ export default {
     data() {
         return {
             toolbarOptions: [
-                [{ 'header': [1, 2, 3, 4, false] }],
-                ['bold', 'italic', 'underline'],
-                [{ 'list': 'ordered' }, { 'list': 'bullet' }],
-                [{ 'indent': '-1' }, { 'indent': '+1' }],
-                [{ 'align': [] }],
-                ['link', 'video'],
-                ['clean']
+                [{ 'header': [2, 3, 4, false] },'bold', 'italic', 'underline'],
+                [,{'list': 'ordered' },{ 'list': 'bullet' }, { 'indent': '+1' }, 'clean',{ 'align': [] },'video', 'link'],
             ],
             title: '',
             description: '',
             author: null,
             users: [],
             title_img: null,
-            content: '',
+            content: '<h2>H2 Überschrift</h2><p>Hier Inhalt des Artikels eintragen</p>',
             length: '0',
             topic_id: '',
             topic_name: '',
@@ -103,6 +101,7 @@ export default {
             legend: ''
         };
     },
+    emits: ['fetchArticleTitles'],
     mounted() {
         this.fetchUsers();
         this.fetchCategories();
@@ -138,6 +137,7 @@ export default {
         // Bei Erfolg
         this.legendArticle = response.data.message;
         console.log("Erfolgreich gespeichert!");
+        this.fetchArticleTitles();
     })
     .catch(error => {
         if (error.response.status === 422) {
@@ -153,19 +153,22 @@ export default {
             // Fehlermeldung anzeigen
             this.legendArticle = errorMessage;
             this.legendStyle = 'color: var(--primary-color);';
+            this.fetchArticleTitles();
         } else {
             // Wenn ein anderer Fehler auftritt, allgemeine Fehlermeldung anzeigen
             this.legendArticle = 'Ein Fehler ist aufgetreten. Bitte versuchen Sie es erneut.';
             this.legendStyle = 'color: var(--primary-color);';
         }
     });
-},
+}, fetchArticleTitles() {
+      // Diese Methode wird von Komponente B aufgerufen
+      this.$emit('fetchArticleTitles');
+    },
         fetchUsers() {
             axios.get('/api/users')
                 .then(response => {
                     this.users = response.data;
                     this.author = this.users[0].id;
-                    console.log(this.author)
                 })
                 .catch(error => {
                     console.error('Error fetching users', error);
@@ -187,7 +190,6 @@ export default {
                 .then(response => {
                     this.knowledge_topics = response.data;
                     this.topic_id = this.knowledge_topics[0].id;
-                    console.log(this.topic_id);
                 })
                 .catch(error => {
                     console.error('Error fetching knowledge categories', error);

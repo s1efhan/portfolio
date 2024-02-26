@@ -1,130 +1,133 @@
 @font-face {
-    font-family: 'Nohemi-Regular';
-    src: url('../fonts/Nohemi/Nohemi-Regular.ttf') format('truetype');
-  }
-  
-  @font-face {
-    font-family: 'Nohemi-Bold';
-    src: url('../fonts/Nohemi/Nohemi-Bold.ttf') format('truetype');
-  }
-  
-  @font-face {
-    font-family: 'Nohemi-Thin';
-    src: url('../fonts/Nohemi/Nohemi-Thin.ttf') format('truetype');
-  }
-  
-  h1 {
-    color: var(--primary-color);
-    font-family: 'Nohemi-Bold', sans-serif;
-  }
-  
-  .darkmode h1 {
-    background-color: var(--background-color);
-  }
-  
-  :root {
-    font-family: 'Nohemi-Regular', sans-serif;
-    color: var(--script-color);
-    background-color: var(--script-color);
-    font-synthesis: none;
-    text-rendering: optimizeLegibility;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-  }
-  
-  body,
-  html {
-    height: 100%;
-    margin: 0;
-    padding: 0;
-  }
-  
-  a {
-    text-decoration: none;
-    cursor: pointer;
-  }
-  
-  ul,
-  ol {
-    text-decoration: none;
-    list-style-type: none;
-  }
-  
-  a:hover {
-    color: var(--script-highlight-color);
-  }
-  
-  header {
-    background-color: var(--background-color);
-  }
-  
-  header a {
-    color: var(--script-color);
-    text-decoration: underline;
-  }
-  
-  header a:hover {
-    color: var(--script-color);
-  }
-  
-  #app {
-    background-color: var(--background-color);
-  }
-  
-  @media only screen and (min-width: 1024px) {
-  
-    body {
-      display: flex;
-      flex-direction: column;
-    }
-  
-    main {
-      flex: 1;
-    }
-  
-    #app {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-    }
-  
-    main {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-  
-    main section {
-      width: 90%;
-      /* Streckt den Abschnitt über die gesamte Breite */
-      display: flex;
-      /* Flex-Display verwenden */
-      flex-direction: column;
-      /* In Spaltenrichtung anordnen */
-  
-    }
-  
-    header {
-      display: flex;
-      flex-direction: column;
-    }
-  
-    header>* {
-      margin-left: 5%;
-    }
+  font-family: 'Nohemi-Regular';
+  src: url('../fonts/Nohemi/Nohemi-Regular.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Nohemi-Bold';
+  src: url('../fonts/Nohemi/Nohemi-Bold.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Nohemi-Thin';
+  src: url('../fonts/Nohemi/Nohemi-Thin.ttf') format('truetype');
+}
+
+h1 {
+  color: var(--primary-color);
+  font-family: 'Nohemi-Bold', sans-serif;
+}
+
+.darkmode h1 {
+  background-color: var(--background-color);
+}
+
+:root {
+  font-family: 'Nohemi-Regular', sans-serif;
+  color: var(--script-color);
+  background-color: var(--script-color);
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body,
+html {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+
+a {
+  text-decoration: none;
+  cursor: pointer;
+}
+
+ul,
+ol {
+  text-decoration: none;
+  list-style-type: none;
+}
+
+a:hover {
+  color: var(--script-highlight-color);
+}
+
+header {
+
+  background-color: var(--background-color);
+}
+
+header a {
+  color: var(--script-color);
+  text-decoration: underline;
+}
+
+header a:hover {
+  color: var(--script-color);
+}
+#app {
+  background-color: var(--background-color);
+}
+
+@media only screen and (min-width: 1024px) {
+
+  body {
+    display: flex;
+    flex-direction: column;
   }
 
+  main {
+    flex: 1;
+  width: 90vw;
+  }
+
+  #app {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+
+  main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow:hidden;
+  }
+
+  main section, .blog{
+    width: 90vw;
+    overflow:hidden;
+    /* Streckt den Abschnitt über die gesamte Breite */
+    display: flex;
+    /* Flex-Display verwenden */
+    flex-direction: column;
+    /* In Spaltenrichtung anordnen */
+
+  }
+
+  header {
+    display: flex;
+    flex-direction: column;
+  }
+
+  header>* {
+    margin-left: 5%;
+  }
+}
+
 main {
-    background-color: var(--background-color);
-    color: var(--script-color)
+  background-color: var(--background-color);
+  color: var(--script-color)
 }
 
 main a {
-    color: var(--script-color-highlight);
-    border-bottom: solid thin;
+  color: var(--script-color-highlight);
 }
 
 main a:active,
 main a:hover {
-    border-color: var(--script-color-highlight)
+  border-color: var(--script-color-highlight)
 }

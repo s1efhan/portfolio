@@ -33,7 +33,10 @@ class ArticleController extends Controller
     
         if ($request->hasFile('title_img')) {
             // Datei hochladen und Originaldateinamen beibehalten
-            $path = $request->file('title_img')->store('uploads/title-img');
+            $path = $request->file('title_img')->store('/public/images');
+    
+            // Pfad manipulieren, um den öffentlichen Speicherort anzugeben
+            $path = str_replace('public', 'storage', $path);
     
             // Pfad in die Validierungsdaten einfügen
             $validatedData['title_img'] = $path;
@@ -50,6 +53,17 @@ class ArticleController extends Controller
     {
         $KnowledgeTopics = KnowledgeTopic::select('id', 'topic_name')->get();
         return response()->json($KnowledgeTopics);
+    }
+    public function fetch_article()
+    {
+        $KnowledgeArticle = KnowledgeArticle::select()->get();
+        return response()->json($KnowledgeArticle);
+    }
+
+    public function  getImg($imageName){
+        $imageUrl = Storage::url('public/images/' . $imageName);
+
+        return response()->json(['url' => $imageUrl]);
     }
     public function add_categories(Request $request)
     {

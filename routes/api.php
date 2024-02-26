@@ -3,6 +3,7 @@
 use App\Http\Controllers\ArticleController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ContactController;
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
@@ -21,3 +22,7 @@ Route::post('/knowledge_categories', [ArticleController::class, 'add_categories'
 Route::post('/knowledge_topic', [ArticleController::class, 'add_topic']);
 Route::get('/knowledge_topic', [ArticleController::class, 'fetch_topics']);
 Route::post('/addArticle', [ArticleController::class, 'addArticle']);
+Route::get('/articles', [ArticleController::class, 'fetch_article']);
+Route::get('/get-image-url/{imageName}', [ArticleController::class, 'getImg']);
+
+Route::post('/contact', [ContactController::class, 'sendEmail']);

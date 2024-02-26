@@ -1,42 +1,56 @@
 <!-- App.vue -->
 <script setup>
+import axios from 'axios';
 import { ref, onMounted } from 'vue';
 import Menu from './components/Menu.vue';
 import Footer from './components/Footer.vue';
-const isDarkMode = ref(false); // Initialer Wert für Darkmode
 import Login from './components/Login.vue';
+
+// Refs für den Zustand der App
+const isDarkMode = ref(false);
+const loggedIn = ref(false);
+const imageUrl = ref('');
 
 // Funktion zum Umschalten zwischen Lightmode und Darkmode
 function toggleDarkMode() {
   isDarkMode.value = !isDarkMode.value;
   document.body.classList.toggle('darkmode', isDarkMode.value);
 }
+
+// Funktion zum Überprüfen des eingeloggten Zustands beim Laden der App
 onMounted(() => {
-  if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-    // User prefers dark mode
-    toggleDarkMode();
-
-    //prüfen ob User eingeloggt ist (session)
-  }
-});
-const loggedIn = ref(false);
-
-onMounted(() => {
-
-    if (sessionStorage.getItem('loggedIn')) {
-        loggedIn.value = true;
-    }
-});
-
-const handleLogin = () => {
+  if (sessionStorage.getItem('loggedIn')) {
     loggedIn.value = true;
-    sessionStorage.setItem('loggedIn', true);
+  }
+
+  if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+    toggleDarkMode(); // Darkmode aktivieren, falls bevorzugt
+  }
+
+  fetchImageUrl(); // Bild-URL abrufen
+});
+
+// Handler für den Login
+const handleLogin = () => {
+  loggedIn.value = true;
+  sessionStorage.setItem('loggedIn', true);
 };
+
+// Funktion zum Abrufen der Bild-URL
+async function fetchImageUrl() {
+  try {
+    const response = await axios.get('/api/get-image-url/lol.jpg'); // Passen Sie den Endpunkt entsprechend an
+    imageUrl.value = response.data.url;
+  } catch (error) {
+    console.error('Fehler beim Abrufen der Bild-URL:', error);
+  }
+}
 </script>
+
 <template>
-  <Menu  v-if="loggedIn"></Menu> <!-- Umschalten je nachdem ob Nutzer eingeloggt ist-->
-  <router-view  v-if="loggedIn"></router-view>
-   <Footer  v-if="loggedIn"></Footer>
-   <Login v-else @login-success="handleLogin"></Login> <!-- Änderung hier: auf 'login-success' Event reagieren -->
- </template>
+  <Menu v-if="loggedIn"></Menu>
+  <router-view v-if="loggedIn"></router-view>
+  <Footer v-if="loggedIn"></Footer>
+  <Login v-else @login-success="handleLogin"></Login>
  
+</template>
