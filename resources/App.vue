@@ -48,9 +48,9 @@ async function fetchImageUrl() {
 </script>
 
 <template>
-  <Menu v-if="loggedIn"></Menu>
-  <router-view v-if="loggedIn"></router-view>
-  <Footer v-if="loggedIn"></Footer>
-  <Login v-else @login-success="handleLogin"></Login>
+  <Menu></Menu>
+  <router-view ></router-view>
+  <Footer></Footer>
+    <!--<Login></Login>-->
  
 </template>
