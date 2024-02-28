@@ -1,0 +1,38 @@
+{
+  "resources/css/style.scss": {
+    "file": "assets/style-Br8Z08QS.css",
+    "src": "resources/css/style.scss",
+    "isEntry": true
+  },
+  "resources/fonts/Nohemi/Nohemi-Bold.ttf": {
+    "file": "assets/Nohemi-Bold-8IWF5PtN.ttf",
+    "src": "resources/fonts/Nohemi/Nohemi-Bold.ttf"
+  },
+  "resources/fonts/Nohemi/Nohemi-Regular.ttf": {
+    "file": "assets/Nohemi-Regular-BKuP2Jz0.ttf",
+    "src": "resources/fonts/Nohemi/Nohemi-Regular.ttf"
+  },
+  "resources/fonts/Nohemi/Nohemi-Thin.ttf": {
+    "file": "assets/Nohemi-Thin-CBC1-HY0.ttf",
+    "src": "resources/fonts/Nohemi/Nohemi-Thin.ttf"
+  },
+  "resources/js/app.js": {
+    "file": "assets/app-C51cIya4.js",
+    "src": "resources/js/app.js",
+    "isEntry": true,
+    "dynamicImports": [
+      "resources/js/bootstrap.js"
+    ],
+    "css": [
+      "assets/app-hEpI-9Tf.css"
+    ]
+  },
+  "resources/js/bootstrap.js": {
+    "file": "assets/bootstrap-DqIbdOYu.js",
+    "src": "resources/js/bootstrap.js",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.js"
+    ]
+  }
+}
