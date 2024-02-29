@@ -4,6 +4,7 @@ import('./bootstrap.js');
 import {createApp} from 'vue'
 import App from '../App.vue';
 import router from "./router.js";
+//import vuetify vielleicht später
 // Vor jedem Routing prüfen, ob die Seite /impressum ist und das Meta-Tag hinzufügen
 
 router.beforeEach((to, from, next) => {

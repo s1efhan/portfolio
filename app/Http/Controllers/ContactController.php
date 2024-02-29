@@ -30,12 +30,13 @@ class ContactController extends Controller
         $fromName = env('MAIL_FROM_NAME');
 
         // Hier können Sie die E-Mail-Nachricht direkt senden
-        Mail::html($mailinhalt, function ($message) use ($email, $name, $fromAddress, $fromName, $thema) {
-            $message->to($email) // Dynamisch die Empfängeradresse setzen
-                ->subject("Nachricht zu " .$thema. " von " . $name)
+        Mail::html($mailinhalt, function ($message) use ($fromAddress, $fromName) {
+            $message->to('stefan.theissen@mail.de') // Empfängeradresse festlegen
+                ->subject("Neue Nachricht")
                 ->from($fromAddress, $fromName)
-                ->replyTo($email); // Setze die Antwortadresse auf die des Benutzers
+                ->replyTo($fromAddress); // Antwortadresse auf die des Absenders setzen
         });
+        
 
         return response()->json(['message' => 'E-Mail an ' . $email . ' wurde gesendet'], 200);
     }
