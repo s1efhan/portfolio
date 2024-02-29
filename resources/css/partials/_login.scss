@@ -3,10 +3,11 @@
 
   .login-form {
     background-color: var(--background-color);
-  
+
     border-color: var(--primary-color);
-  
+
   }
+
   .form-container {
     display: flex;
     justify-content: center;
@@ -21,10 +22,12 @@
     display: block;
     margin-bottom: 10px;
   }
+
   .error-message {
     margin-top: 10px;
   }
 }
+
 /* Stile für den Container */
 
 
@@ -52,7 +55,36 @@
 }
 
 .ql-stroke,
-  .ql-fill, .ql-picker span, .ql-snow .ql-picker.ql-expanded .ql-picker-label{
-    stroke:  var(--secondary-color) !important;
-    color: var(--secondary-color)  !important;
-  }
+.ql-fill,
+.ql-picker span,
+.ql-snow .ql-picker.ql-expanded .ql-picker-label {
+  stroke: var(--secondary-color) !important;
+  color: var(--secondary-color) !important;
+}
+
+.wartungsarbeiten-container, .wartungsarbeiten-hintergrund {
+  text-align: center;
+  border-radius: 15px;
+
+  padding: 3em;
+}
+
+.wartungsarbeiten-container h2 {
+  color: #fab566;
+}
+
+.wartungsarbeiten-container h3 {
+  color: #a6bce2;
+
+}
+
+.wartungsarbeiten-container p {
+  color: #343268;
+}
+.wartungsarbeiten-hintergrund {
+  background-color: rgba(166, 188, 226, 0.25);
+  filter: brightness(0%);
+  z-index: -1;
+  position: fixed;
+  box-shadow: 0px 20px 80px rgb(255, 238, 238); /* Hinzufügen des Schattens */
+}
