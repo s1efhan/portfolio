@@ -11,7 +11,9 @@
             justify-content: center;
             align-items: center;
             height: 100vh; width: 100vw;
-            margin: 0;}</style>
+            margin: 0;
+    overflow: hidden;
+}</style>
 </head>
 
 <body>
