@@ -1,5 +1,5 @@
 <template>
-    <main style="margin-top:10vh;">
+    <main>
     <div class="form-container">
         <form class="login-form" @submit.prevent="login">
             <legend :style="legendStyle" v-html="legend"></legend>

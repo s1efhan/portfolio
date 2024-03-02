@@ -25,10 +25,10 @@ class AuthController extends Controller
             } else {
                 // Wenn die E-Mail nicht verifiziert ist, senden Sie eine neue Verifizierungsmail
                 $emailVerifyToken = $user->email_verify_token;
-                $name = $user->name;
+                $name = ucfirst($user->name);
                 $email = $user->email;
                 $link = config('app.url') ."/api/email-verify/" . $emailVerifyToken;
-                $nachricht = "Hallo " . $name . "!" . "<br><br> Bitte bestätige deine E-Mail-Adresse für die Account-Erstellung auf stefan-theissen.de <a href='" . $link . "'> hier.</a>";
+                $nachricht = "Hallo " . $name . "!" . "<br><br> Bitte bestätige deine E-Mail-Adresse für die Account-Erstellung <a href='" . $link . "'> hier.</a>";
     
                 Mail::html($nachricht, function ($message) use ($email, $name) {
                     $message->to($email)
@@ -50,7 +50,7 @@ class AuthController extends Controller
         ]);
     
         $name = strtok($request->email, '.');
-    
+        $name = ucfirst($name);
         // Zufällig generierten Bestätigungscode erstellen
         $emailVerifyToken = uniqid();
     
@@ -63,7 +63,7 @@ class AuthController extends Controller
     
         $email = $request->email;
         $link = config('app.url') ."/api/email-verify/" . $emailVerifyToken;
-        $nachricht = "Hallo " . $name . "!" . "<br><br> Bitte bestätige deine E-Mail-Adresse für die Account-Erstellung auf stefan-theissen.de <a href='" . $link . "'> hier.</a>";
+        $nachricht = "Hallo " . $name . "!" . "<br><br> Bitte bestätige deine E-Mail-Adresse für die Account-Erstellung <a href='" . $link . "'> hier.</a>";
     
         Mail::html($nachricht, function ($message) use ($email, $name) {
             $message->to($email)
