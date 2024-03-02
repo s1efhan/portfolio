@@ -7,6 +7,8 @@ import Wissen from '../components/Wissen.vue';
 import Sitemap from '../components/Sitemap.vue';
 import Projekte from '../components/Projekte.vue';
 import Kontakt from '../components/Kontakt.vue';
+import Lebenslauf from '../components/Lebenslauf.vue';
+import Login from '../components/Login.vue';
 
 const router = createRouter({
     history: createWebHistory(),
@@ -19,6 +21,8 @@ const router = createRouter({
       { path: '/kontakt', component: Kontakt },
       { path: '/projekte', component: Projekte },
       { path: '/wissen/medien', component: Wissen },
+      { path: '/login', component: Login },
+      { path: '/lebenslauf', component: Lebenslauf}
     ],
   });
   export default router;

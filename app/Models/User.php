@@ -12,6 +12,7 @@ class User extends Authenticatable
 
     protected $fillable = [
         'name', 'email', 'password', 'profile_pic', 'birth_date', 'phone_number', 'address', 'instagram_tag', 'language',
+        'email_verified_at', 'email_verify_token', // Neues Feld für die E-Mail-Bestätigung
     ];
 
     protected $hidden = [
@@ -20,6 +21,5 @@ class User extends Authenticatable
 
     protected $casts = [
         'email_verified_at' => 'datetime',
-        // Hier können Sie weitere Felder hinzufügen, die vom Typ 'datetime' sein sollen
     ];
 }

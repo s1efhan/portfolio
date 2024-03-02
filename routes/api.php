@@ -8,14 +8,15 @@ use App\Http\Controllers\ContactController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
 
-Route::post('/login', [AuthController::class, 'login']); // Verwendung der Array-Syntax für Controller
+
+
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::post('/login', [AuthController::class, 'login']); // Duplizierte Route entfernt
-
+Route::post('/login', [AuthController::class, 'login']);
+Route::post('/register', [AuthController::class, 'register']);
 Route::get('/users', [UserController::class, 'index']); // Verwendung der Array-Syntax für Controller
 Route::get('/knowledge_categories', [ArticleController::class, 'fetch_categories']);
 Route::post('/knowledge_categories', [ArticleController::class, 'add_categories']);
@@ -26,3 +27,6 @@ Route::get('/articles', [ArticleController::class, 'fetch_article']);
 Route::get('/get-image-url/{imageName}', [ArticleController::class, 'getImg']);
 
 Route::post('/contact', [ContactController::class, 'sendEmail']);
+Route::post('/cv-download', [ContactController::class, 'cvDownload']);
+Route::get('/lebenslauf/send', [ContactController::class, 'sendCv'])->name('lebenslauf.send');
+Route::get('email-verify/{token}', [AuthController::class, 'verify_email'])->name('email.verify');

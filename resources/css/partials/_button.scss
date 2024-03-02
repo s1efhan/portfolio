@@ -6,6 +6,9 @@
         padding: 10px 20px;
         font-size: 1rem;
         font-weight: 600;
+            white-space: nowrap; /* Beide Worte in einer Zeile */
+
+        
     }
 }
 
@@ -15,20 +18,39 @@ button {
     border-radius: 5px;
     cursor: pointer;
     color: var(--script-color);
+    white-space: nowrap; /* Beide Worte in einer Zeile */
     padding: 0.5em;
 }
-.primary_button {
-background-color: var(--primary-color);
-color: var(--secondary-color);
-margin-bottom: 1.5em;
-margin-top: 1.5em;
+.primary_button:hover { background-color: var(--background-color);
+    color: var(--primary-color);
+    margin-bottom: 1.5em;
+    border: solid var(--primary-color);
+    margin-top: 1.5em;
+    border-radius: 12px;}
+
+
+.primary_button, .primary_button_full {
+    background-color: var(--primary-color);
+    color: var(--background-color);
+    margin-bottom: 1.5em;
+    border: solid var(--primary-color);
+    margin-top: 1.5em;
+    border-radius: 12px;
 }
 
 .secondary_button {
-    background-color: var(--script-color);
-    color: var(--background-color);
+    background-color: var(--background-color);
+    color: var(--script-color);
+    border: solid var(--script-color);
+    border-radius: 12px;
     margin-bottom: 1.5em;
     margin-top: 1.5em;
+}
+
+.secondary_button:hover {
+    background-color: var(--script-color);
+    color: var(--background-color);
+    border-color: var(--background-color)
 }
 
 .accent_button {

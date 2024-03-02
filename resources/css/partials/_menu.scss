@@ -4,7 +4,7 @@
         min-height: 15vh;
     }
 
-    
+    .desktop-nav {background-color: var(--background-color);}
 
     nav ul {
         width: 70%;
@@ -20,7 +20,9 @@
         /* Teilt den verfügbaren Platz gleichmäßig auf */
         align-items: center;
     }
-
+    .search_icon {
+        svg {padding:0; margin:0;width: 1.2em;}}
+        #search_bar_nav{width: 10em;height: 0.5em; border-radius: 15px;}
     nav ul li {
         height: 100%;
         text-align: center;
@@ -53,7 +55,6 @@
    
 }
 
-/* Standard-Stile für das Navigationsmenü */
 
 nav ul li {
     color: var(--secondary-color);
