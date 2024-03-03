@@ -1,12 +1,18 @@
-footer a {
-    color:var(--script-color);
-}
 footer {
-    background-color: var(--background-color);
-    text-align: center;
-    color:var(--script-color);
+    width: 100vw;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly; /* space-evenly auf den Footer anwenden */
+    height: 10vh;
+  
+    ul {
+      display: flex;
+      flex-direction: row;
+      padding: 0;
+      margin:0 auto;
+      li {
+        padding: 0.5em;
+      }
+    }
   }
-
-  footer a:hover{
-    color:var(--script-color);
-  }
+  

@@ -21,13 +21,16 @@ class AuthController extends Controller
     
             // Überprüfen, ob die E-Mail bereits verifiziert wurde
             if ($user->email_verified_at) {
+                session(['logged_in' => true]); // Anmeldestatus in die Session schreiben
+                session(['user_id' => $user->id]); // user_id in die Session schreiben
+                session(['user_name' => $user->name]); 
                 return response()->json(['message' => 'Erfolgreich angemeldet'], 200);
             } else {
                 // Wenn die E-Mail nicht verifiziert ist, senden Sie eine neue Verifizierungsmail
                 $emailVerifyToken = $user->email_verify_token;
                 $name = ucfirst($user->name);
                 $email = $user->email;
-                $link = config('app.url') ."/api/email-verify/" . $emailVerifyToken;
+                $link = config('app.url') ."/email-verify/" . $emailVerifyToken;
                 $nachricht = "Hallo " . $name . "!" . "<br><br> Bitte bestätige deine E-Mail-Adresse für die Account-Erstellung <a href='" . $link . "'> hier.</a>";
     
                 Mail::html($nachricht, function ($message) use ($email, $name) {
@@ -41,7 +44,15 @@ class AuthController extends Controller
     
         return response()->json(['message' => 'Ungültige Anmeldeinformationen'], 401);
     }
-
+    
+    public function logout(Request $request)
+    {
+        session(['logged_in' => false]); // Anmeldestatus in die Session schreiben
+        session(['user_id' => ""]); // user_id in die Session schreiben
+        session(['user_name' =>  ""]); 
+        return response()->json(['message' => 'Erfolgreich abgemeldet'], 200);
+    }
+    
     public function register(Request $request)
     {
         $request->validate([
@@ -62,7 +73,7 @@ class AuthController extends Controller
         ]);
     
         $email = $request->email;
-        $link = config('app.url') ."/api/email-verify/" . $emailVerifyToken;
+        $link = config('app.url') ."/email-verify/" . $emailVerifyToken;
         $nachricht = "Hallo " . $name . "!" . "<br><br> Bitte bestätige deine E-Mail-Adresse für die Account-Erstellung <a href='" . $link . "'> hier.</a>";
     
         Mail::html($nachricht, function ($message) use ($email, $name) {

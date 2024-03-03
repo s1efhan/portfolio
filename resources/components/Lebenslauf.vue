@@ -1,18 +1,13 @@
 <template>
-       <main>
-                <header>
-                        <Breadcrumps></Breadcrumps>
-                </header>
-     <div class="form-container">
+                <h1>Lebenslauf Download</h1>
     <form  @submit.prevent="csvDownload">
         <label for="email">E-Mail:</label>
-        <input type="email" id="email" name="email" v-model="email" required><br><br>
-        
+        <input type="email" id="email" name="email" v-model="email" required>
         <label for="name">Name:</label>
-        <input type="text" id="name" name="name" v-model="name"><br><br>
+        <input type="text" id="name" name="name" v-model="name">
         
         <label for="company">Unternehmen:</label>
-        <input type="text" id="company" name="company" v-model="company"><br><br>
+        <input type="text" id="company" name="company" v-model="company">
         
         <select id="position" name="position" v-model="selectedPosition">
             <option value="Personaler/HR">Personaler/HR</option>
@@ -23,13 +18,12 @@
         </select>
 
         <input type="text" id="anderePosition" name="anderePosition" v-model="anderePosition" v-show="selectedPosition === 'Andere'">
-        <p> {{errorMessage}}</p>
         <button class= "primary_button_full" type="submit" name="submit">Download</button>
-        
-    </form></div></main>
+        <p :style="fieldsetStyle">{{ errorMessage }}</p>
+  </form>
 </template>
-
 <script>
+import axios from 'axios';
 export default {
     data() {
         return {
@@ -38,7 +32,8 @@ export default {
             company: '',
             selectedPosition: '',
             anderePosition: '',
-            errorMessage:''
+            errorMessage:'',
+            fieldsetStyle: 'color: var(--text);'
         };
     },
     methods: {
@@ -52,6 +47,7 @@ export default {
         csvDownload() {
             // Daten validieren
             if (!this.email) {
+                this.fieldsetStyle="color: var(--primary);"
                 this.errorMessage = 'Bitte geben Sie Ihre E-Mail-Adresse ein.';
                 return;
             }
@@ -59,7 +55,7 @@ export default {
             // Hier weitere Validierungen hinzufügen...
             
             // Senden der Daten
-            axios.post('/api/cv-download', {
+            axios.post('/cv-download', {
                 email: this.email,
                 name: this.name,
                 company: this.company,
@@ -68,11 +64,13 @@ export default {
             .then(response => {
                 // Erfolgreiche Antwort
                 console.log(response.data);
+                this.fieldsetStyle="color: var(--primary);"
                 this.errorMessage = 'Erfolgreicher Download - Eine unzensierte Version erhältst du sobald deine Eingabedaten verifiziert wurden per Email';
             })
             .catch(error => {
                 // Fehlerbehandlung
                 console.error(error);
+                this.fieldsetStyle="color: var(--primary);"
                 this.errorMessage = 'Beim Download ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut.';
             });
         }

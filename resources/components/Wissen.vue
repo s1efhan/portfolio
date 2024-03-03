@@ -4,11 +4,7 @@ import Breadcrumps from './Breadcrumps.vue';
 import AddArticle from './AddArticle.vue';
 </script>
 <template>
-        <main>
-                <header>
-                        <Breadcrumps></Breadcrumps>
-                        <h1>Wissen</h1>
-                </header>
+                <h1>Wissen</h1>
                 <section class="blog">
                         <table v-for="article in articles" :key="article.id">
                                 <thead>
@@ -47,7 +43,6 @@ import AddArticle from './AddArticle.vue';
 
                 </section>
                 <AddArticle @fetchArticleTitles="fetchArticleTitles"></AddArticle>
-        </main>
 </template>
 
 <script>
@@ -67,7 +62,7 @@ export default {
                         return date.toLocaleDateString('de-DE', options);
                 },
                 fetchArticleTitles() {
-                        axios.get('/api/articles')
+                        axios.get('/articles')
                                 .then(response => {
                                         this.articles = response.data;
                                 })

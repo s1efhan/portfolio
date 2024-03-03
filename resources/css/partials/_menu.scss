@@ -1,107 +1,66 @@
-@media only screen and (min-width: 1024px) {
-    nav {
-        width: 100%;
-        min-height: 15vh;
-    }
-
-    .desktop-nav {background-color: var(--background-color);}
-
-    nav ul {
-        width: 70%;
-        height: 100%;
-        margin: 0 auto;
-        /* Zentriert das Menü horizontal */
-        padding: 0;
-        list-style-type: none;
-        /* Entfernt Aufzählungspunkte */
-        display: flex;
-        /* Verwendet Flexbox für die Anordnung der Elemente */
-        justify-content: space-around;
-        /* Teilt den verfügbaren Platz gleichmäßig auf */
-        align-items: center;
-    }
-    .search_icon {
-        svg {padding:0; margin:0;width: 1.2em;}}
-        #search_bar_nav{width: 10em;height: 0.5em; border-radius: 15px;}
-    nav ul li {
-        height: 100%;
-        text-align: center;
-        display: flex;
-        align-items: center;
-        flex: 1;
-        /* Ändere width zu flex und füge flex: 1 hinzu */
-    }
-
-    nav a {
-        color: var(--secondary-color);
-        text-decoration: none;
-        padding: 10px;
-        display: inline-block;
-        /* Ändere display zu inline-block */
-        /* Damit der gesamte Bereich anklickbar ist */
-        width: auto;
-        /* Füge width: auto hinzu */
-    }
-
-    .fake_menu_item,
-    .hamburger {
-        display: none
-    }
-
-    .mobile-nav {
-        display: none;
-    }
-
-   
+svg {
+  fill: var(--secondary);
+  max-height: 2em;
+  max-width: 2em;
 }
 
+.visible {
+  display: flex
+}
+
+.invisible {
+  display: none;
+}
+
+nav {
+  position: fixed;
+  width: 100%;
+}
+
+.toggleHamburger {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  li {
+    padding: 1em  1em 0 0;
+    svg { background-color: var(--background);}
+  }
+}
+nav input {  width:60%; background-color: var(--accent); color: var(--text)}
+.backgroundOn {
+  background-color: var(--background);
+}
+
+nav ul {
+  padding: 0;
+  margin: 0;
+  display: flex;
+}
 
 nav ul li {
-    color: var(--secondary-color);
+  width: fit-content;
 }
 
-.hamburger-items li {
-    width: 50%;
-    text-align: center;
-}
-.hamburger-items li a {width: 100%; height: 100%;}
-svg {
-    fill: var(--secondary-color);
-    height: 1.5em;
-}
+.nav-links {
+  margin: 0 auto;
+  flex-direction: column;
+  width: 75%;
+  font-size: 1.5em;
 
-nav a {
-    color: var(--secondary-color);
-    text-decoration: none;
-}
+  .nav-cta {
+    justify-content: center;
+  }
 
-.menu_active a {
-    color: var(--script-color);
-}
+  li {
+    padding: 0 0 1em 0;
+    width: 100%;
 
-.menu_inactive a {
-    color: var(--secondary-color);
-}
+    svg {
+      height: 1em;
+    }
+  }
 
-nav a:hover {
-    color: var(--secondary-color);
-}
-
-nav ul li a:hover {
-    color: var(--script-color);
-}
-
-nav a:active {
-    color: var(--secondary-color);
-}
-
-.fixed-wrapper {
-    position: fixed;
-    width: 100vw;
+  .visible li {
     display: flex;
-    flex-direction: column;
-}
-
-.hamburger-items {
-    background-color: var(--background-color);
+  }
 }

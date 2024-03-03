@@ -128,7 +128,7 @@ export default {
     formData.append('content', this.content);
     formData.append('length', this.length);
 
-    axios.post('/api/addArticle', formData, {
+    axios.post('/addArticle', formData, {
         headers: {
             'Content-Type': 'multipart/form-data' // Erforderlich für die Übertragung von Dateien
         }
@@ -165,7 +165,7 @@ export default {
       this.$emit('fetchArticleTitles');
     },
         fetchUsers() {
-            axios.get('/api/users')
+            axios.get('/users')
                 .then(response => {
                     this.users = response.data;
                     this.author = this.users[0].id;
@@ -175,7 +175,7 @@ export default {
                 });
         },
         fetchCategories() {
-            axios.get('/api/knowledge_categories')
+            axios.get('/knowledge_categories')
                 .then(response => {
                     this.knowledge_categories = response.data;
                     if (this.knowledge_categories.length > 0) {
@@ -186,7 +186,7 @@ export default {
                     console.error('Error fetching knowledge categories', error);
                 });
         }, fetchTopics() {
-            axios.get('/api/knowledge_topic')
+            axios.get('/knowledge_topic')
                 .then(response => {
                     this.knowledge_topics = response.data;
                     this.topic_id = this.knowledge_topics[0].id;
@@ -197,7 +197,7 @@ export default {
         },
 
         addTopic() {
-            axios.post('/api/knowledge_topic', {
+            axios.post('/knowledge_topic', {
                 topic_name: this.topic_name,
                 knowledge_category_id: this.knowledge_category_id
             })
@@ -213,7 +213,7 @@ export default {
                 });
         },
         addKnowledgeCategory() {
-            axios.post('/api/knowledge_categories', {
+            axios.post('/knowledge_categories', {
                 knowledge_category_name: this.knowledge_category_name,
                 nav_item: this.knowledge_category_name
             })

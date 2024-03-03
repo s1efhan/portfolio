@@ -1,68 +1,36 @@
-@media only screen and (min-width: 1024px) {
-
-  label {
-    margin: 20px;
-  }
-  form {
-    padding: 25px;
-    min-width: 30%;
-    max-width: 60%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-
-  form legend {
-    margin-bottom: 15px;
-  }
-
-  input,
-  form select {
-    padding: 10px;
-    font-size: 1rem;
-    width: calc(100% - 20px);
-  }
+.ql-header.ql-picker,
+div.ql-editor,
+.ql-picker-label,
+#content div.ql-editor {
+  z-index: -1;
 }
 
+input, textarea {
+  border-radius: 6px;
+  border: none;
+  height: 2em;
+}
+
+form label {
+  color: var(--text);
+}
 
 form {
-  border-radius: 15px;
-  border: solid;
-  overflow:hidden;
-  display:flex;
+  display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding-top: 1em;
-}
-input,
-select {
-  background-color: var(--script-color);
-  color: var(--background-color);
-  border:none;
-  border-radius: 3px;
-}
-input:active {border:none}
-label {
-  text-align: start;
-}
-
-form legend {
-  font-weight: bold;
-  text-align: center;
-  width: 100%;
+  overflow: hidden;
+  align-items: center; 
+  input, button, textarea, select {
+    border-radius: 6px;
+    margin: 1em 0 1em  0;
+    border: none;
+    width: 90%;
+    background-color: var(--accent);
+    color: var(--secondary);
+    font-size: 1em;
+  }
+  select {text-align: center;}
+  textarea {height: 12em; resize: none }
+  fieldset {border-radius: 6px; border: solid var(--accent);padding: 1em;}
 }
 
-form input,
-form select {
- 
-  width: 70%;
-  margin: 1em;
-  border: none;
-}
-select,
-select:active {
-  text-align: center;
-  text-align-last: center;
-
-}

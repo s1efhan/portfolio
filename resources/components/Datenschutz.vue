@@ -1,5 +1,5 @@
 <template>
     <main>
-        <h1>Datenschutzrichtlinie</h1>
+        <h1>Datenschutz</h1>
     </main>
 </template>

@@ -1,6 +1,6 @@
 {
   "resources/css/style.scss": {
-    "file": "assets/style-DGuAyK_P.css",
+    "file": "assets/style-Duxo25Md.css",
     "src": "resources/css/style.scss",
     "isEntry": true
   },
@@ -17,22 +17,11 @@
     "src": "resources/fonts/Nohemi/Nohemi-Thin.ttf"
   },
   "resources/js/app.js": {
-    "file": "assets/app-BHIQbYKE.js",
+    "file": "assets/app-DAE6kfQI.js",
     "src": "resources/js/app.js",
     "isEntry": true,
-    "dynamicImports": [
-      "resources/js/bootstrap.js"
-    ],
     "css": [
       "assets/app-hEpI-9Tf.css"
-    ]
-  },
-  "resources/js/bootstrap.js": {
-    "file": "assets/bootstrap-Blw1XkW8.js",
-    "src": "resources/js/bootstrap.js",
-    "isDynamicEntry": true,
-    "imports": [
-      "resources/js/app.js"
     ]
   }
 }

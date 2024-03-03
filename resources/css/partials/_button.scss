@@ -1,61 +1,23 @@
-@media only screen and (min-width: 1024px) {
-
-    button {
-        max-width: 200px;
-        margin-top: 15px;
-        padding: 10px 20px;
-        font-size: 1rem;
-        font-weight: 600;
-            white-space: nowrap; /* Beide Worte in einer Zeile */
-
-        
-    }
-}
-
 button {
-    background-color: var(--primary-color);
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    color: var(--script-color);
-    white-space: nowrap; /* Beide Worte in einer Zeile */
+    border-radius: 6px;
+    border: solid 3px;
     padding: 0.5em;
+    font-weight: bold;
+    font-size: 0.7em;
+    max-width: 40vw;
 }
-.primary_button:hover { background-color: var(--background-color);
-    color: var(--primary-color);
-    margin-bottom: 1.5em;
-    border: solid var(--primary-color);
-    margin-top: 1.5em;
-    border-radius: 12px;}
-
-
-.primary_button, .primary_button_full {
-    background-color: var(--primary-color);
-    color: var(--background-color);
-    margin-bottom: 1.5em;
-    border: solid var(--primary-color);
-    margin-top: 1.5em;
-    border-radius: 12px;
+.primary-button{
+color: var(--background);
+background-color: var(--primary);
+border-color: var(--primary);
 }
-
-.secondary_button {
-    background-color: var(--background-color);
-    color: var(--script-color);
-    border: solid var(--script-color);
-    border-radius: 12px;
-    margin-bottom: 1.5em;
-    margin-top: 1.5em;
+.secondary-button {
+    color: var(--background);
+    background-color: var(--secondary);
+    border-color: var(--secondary);
 }
-
-.secondary_button:hover {
-    background-color: var(--script-color);
-    color: var(--background-color);
-    border-color: var(--background-color)
-}
-
-.accent_button {
-    background-color: var(--secondary-color);
-    color: var(--script-color);
-    margin-bottom: 1.5em;
-    margin-top: 1.5em;
+.accent-button {
+    color: var(--secondary);
+    background-color: var(--background);
+    border-color: var(--secondary);
 }
