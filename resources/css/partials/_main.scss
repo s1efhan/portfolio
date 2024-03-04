@@ -20,9 +20,25 @@ html {
 h1 {
   color: var(--primary);
   font-family: 'Nohemi-Bold', sans-serif;
+
   @media (prefers-color-scheme: light) {
-        color: var(--text);
+    color: var(--text);
+  }
 }
+
+.wartungsarbeiten {
+  color: var(--background);
+  background-color: var(--secondary);
+
+  h2 {
+    color: var(--accent)
+  }
+
+  div {
+    border: solid var(--text);
+    padding: 2em;
+    b{color: var(--primary)}
+  border-radius: 6px;}
 }
 
 @media (prefers-color-scheme: dark) {
@@ -30,16 +46,18 @@ h1 {
   :root {
     font-family: 'Nohemi-Regular', sans-serif;
     color: var(--background);
-    background-color: var(--text);
+    background-color: var(----background);
     font-synthesis: none;
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
 }
+
 td {
   max-height: 10vh;
 }
+
 img {
   max-height: 80vh;
 }
@@ -49,6 +67,7 @@ td {
     height: 10em;
   }
 }
+
 
 @media (prefers-color-scheme: light) {
 
@@ -108,7 +127,7 @@ header a:hover {
 }
 
 #app {
-  
+
   width: 100%;
   background-color: var(--background);
 }
@@ -118,7 +137,7 @@ table {
 }
 
 main {
-min-height: 90vh;
+  min-height: 90vh;
   margin: 0 0.5em 0 0.5em;
   padding: 0;
   background-color: var(--background);

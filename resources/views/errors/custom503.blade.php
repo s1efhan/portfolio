@@ -16,15 +16,12 @@
 }</style>
 </head>
 
-<body>
+<body class="wartungsarbeiten">
     <div class="wartungsarbeiten-container">
 <h2>Wartungsarbeiten</h2>
-<h3>503 - SERVICE UNAVAILABLE </h3>
+<h3> SERVICE UNAVAILABLE  - <b>503</b></h3>
 <p>Currently under construction </p>
 </div>
-<div class ="wartungsarbeiten-hintergrund"> <h2>Wartungsarbeiten</h2>
-<h3>503 - SERVICE UNAVAILABLE </h3>
-<p>Currently under construction </p><div>
 </body>
 
 </html>
