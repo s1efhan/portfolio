@@ -7,15 +7,17 @@ use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Http\Request;
 use App\Models\KnowledgeCategory;
 use App\Models\KnowledgeTopic;
+use App\Models\Image;
 use App\Models\KnowledgeArticle;
 use Illuminate\Support\Facades\Storage;
-
-
+use Illuminate\Support\Facades\Http;
+use App\Http\Controllers\ImageController;
 class ArticleController extends Controller
 {
     public function fetch_categories()
     {
         $KnowledgeCategories = KnowledgeCategory::select('id', 'name')->get();
+
         return response()->json($KnowledgeCategories);
     }
     public function addArticle(Request $request)
@@ -31,7 +33,41 @@ class ArticleController extends Controller
             'title_img' => 'nullable|image|mimes:jpeg,png|max:5120', //Max 5MB, nur JPEG und PNG
         ]);
     
+        // Bild aus dem Request extrahieren
         if ($request->hasFile('title_img')) {
+            $image = $request->file('title_img');
+            
+            // Hochladen des Bildes auf Imgur
+            $response = Http::withHeaders([
+                'Authorization' => 'Client-ID ' . env('IMGUR_CLIENT_ID'),
+            ])->attach('image', file_get_contents($image), $image->getClientOriginalName())
+              ->post('https://api.imgur.com/3/image');
+    
+            if ($response->successful()) {
+                $responseData = $response->json();
+                $imgurUrl = $responseData['data']['link'];
+                $deleteHash = $responseData['data']['deletehash'];
+    
+                // Speichern der Imgur-URL oder des Delete-Hash in deiner Datenbank oder tue etwas anderes damit
+                // z.B.:
+                $imageModel = new Image();
+                $imageModel->imgur_url = $imgurUrl;
+                $imageModel->delete_hash = $deleteHash;
+                $imageModel->save();
+    
+                // Setze den Titel-Image-Pfad auf das Imgur-URL
+                $validatedData['title_img'] = $imgurUrl;
+            } else {
+                return response()->json(['error' => 'Failed to upload image to Imgur'], 500);
+            }
+        }
+    
+        // Erstelle den Artikel
+        $article = KnowledgeArticle::create($validatedData);
+    
+        return response()->json(['message' => 'Artikel erfolgreich erstellt', 'article' => $article], 201);
+    }
+       /*   if ($request->hasFile('title_img')) {
             // Datei hochladen und Originaldateinamen beibehalten
             $path = $request->file('title_img')->store('/public/images');
     
@@ -41,12 +77,8 @@ class ArticleController extends Controller
             // Pfad in die Validierungsdaten einfügen
             $validatedData['title_img'] = $path;
         }
-    
-        // Artikel erstellen
-        $article = KnowledgeArticle::create($validatedData);
-    
-        return response()->json(['message' => 'Artikel erfolgreich erstellt', 'article' => $article], 201);
-    }
+    */
+
     
 
     public function fetch_topics()
@@ -56,9 +88,17 @@ class ArticleController extends Controller
     }
     public function fetch_article()
     {
-        $KnowledgeArticle = KnowledgeArticle::select()->get();
-        return response()->json($KnowledgeArticle);
+        try {
+            $knowledgeArticles = KnowledgeArticle::all();
+            if ($knowledgeArticles->isEmpty()) {
+                return response()->json(['data' => [], 'message' => 'Keine Artikel gefunden'], 404);
+            }
+            return response()->json($knowledgeArticles, 200);
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'Fehler beim Abrufen der Artikel: ' . $e->getMessage()], 500);
+        }
     }
+    
 
     public function  getImg($imageName){
         $imageUrl = Storage::url('public/images/' . $imageName);

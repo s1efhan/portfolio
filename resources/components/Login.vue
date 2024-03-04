@@ -5,8 +5,8 @@
         <input id="email" type="email" v-model="email">
         <label for="password">Passwort:</label>
         <input id="password" type="password" v-model="password">
-        <button class="primary_button" type="submit">Anmelden</button>
-        <button class="secondary_button" type="button" @click="register">Registrieren</button>
+        <button class="primary-button" type="submit">Anmelden</button>
+        <button class="secondary-button" type="button" @click="register">Registrieren</button>
         <p :style="errorStyle">{{ errorMessage }}</p>
     </form>
 </template>

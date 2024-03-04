@@ -1,3 +1,11 @@
+@media (prefers-color-scheme: light) {
+
+  nav,
+  nav a {
+    color: var(--text);
+  }
+}
+
 svg {
   fill: var(--secondary);
   max-height: 2em;
@@ -13,20 +21,30 @@ svg {
 }
 
 nav {
-  position: fixed;
   width: 100%;
+  position:absolute
 }
 
 .toggleHamburger {
   width: 100%;
   display: flex;
   justify-content: flex-end;
+
   li {
-    padding: 1em  1em 0 0;
-    svg { background-color: var(--background);}
+    padding: 2em 2em 0 0;
+
+    svg {
+      background-color: var(--background);
+    }
   }
 }
-nav input {  width:60%; background-color: var(--accent); color: var(--text)}
+
+nav input {
+  width: 60%;
+  background-color: var(--accent);
+  color: var(--text)
+}
+
 .backgroundOn {
   background-color: var(--background);
 }

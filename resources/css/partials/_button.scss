@@ -4,20 +4,46 @@ button {
     padding: 0.5em;
     font-weight: bold;
     font-size: 0.7em;
-    max-width: 40vw;
+    max-width: 45vw;
+    white-space: nowrap;
 }
-.primary-button{
-color: var(--background);
-background-color: var(--primary);
-border-color: var(--primary);
+
+.primary-button {
+    color: var(--background);
+    background-color: var(--primary);
+    border-color: var(--primary);
 }
+
 .secondary-button {
     color: var(--background);
     background-color: var(--secondary);
     border-color: var(--secondary);
 }
+
 .accent-button {
     color: var(--secondary);
     background-color: var(--background);
     border-color: var(--secondary);
+}
+
+@media (prefers-color-scheme: light) {
+
+    .primary-button {
+        color: var(--primary);
+        background-color: var(--secondary);
+        border-color: var(--secondary);
+    }
+    
+    .secondary-button {
+        color: var(--text);
+        background-color: var(--accent);
+        border-color: var(--accent);
+    }
+    
+    .accent-button {
+        color: var(--background);
+        background-color: var(--text);
+        border-color: var(--text);
+    }
+
 }

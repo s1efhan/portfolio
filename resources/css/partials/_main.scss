@@ -12,23 +12,42 @@
   font-family: 'Nohemi-Thin';
   src: url('../fonts/Nohemi/Nohemi-Thin.ttf') format('truetype');
 }
-html {touch-action: manipulation;}
+
+html {
+  touch-action: manipulation;
+}
+
 h1 {
   color: var(--primary);
   font-family: 'Nohemi-Bold', sans-serif;
+  @media (prefers-color-scheme: light) {
+        color: var(--text);
 }
-@media (prefers-color-scheme: dark) {
- 
-:root {
-  font-family: 'Nohemi-Regular', sans-serif;
-  color: var(--background);
-  background-color: var(--text);
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
 }
 
+@media (prefers-color-scheme: dark) {
+
+  :root {
+    font-family: 'Nohemi-Regular', sans-serif;
+    color: var(--background);
+    background-color: var(--text);
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
+td {
+  max-height: 10vh;
+}
+img {
+  max-height: 80vh;
+}
+
+td {
+  img {
+    height: 10em;
+  }
 }
 
 @media (prefers-color-scheme: light) {
@@ -42,20 +61,24 @@ h1 {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
-  
+
 }
+
 body,
 html {
-  height: 100%;
   margin: 0;
   padding: 0;
+  background-color: var(--background);
 }
+
 body {
   display: flex;
-  user-zoom: fixed; /* Blockiert das Zoomen auf der gesamten Seite */
-  -ms-content-zooming: none; /* Für den Internet Explorer */
-  -ms-touch-action: none; /* Für den Internet Explorer */
-  -webkit-text-size-adjust: 100%; /* Deaktiviert Tex*/
+  /* Blockiert das Zoomen auf der gesamten Seite */
+  -ms-content-zooming: none;
+  /* Für den Internet Explorer */
+  /* Für den Internet Explorer */
+  -webkit-text-size-adjust: 100%;
+  /* Deaktiviert Tex*/
   overflow-x: hidden;
 }
 
@@ -83,22 +106,30 @@ header a {
 header a:hover {
   color: var(--text);
 }
+
 #app {
-  width:100%;
+  
+  width: 100%;
   background-color: var(--background);
 }
 
-img {height:100%;width: 100%;}
-table {width: 100%;}
+table {
+  width: 100%;
+}
 
 main {
-  min-height: 90%;
-  margin: 0 3.5em 0 2em;
+min-height: 90vh;
+  margin: 0 0.5em 0 0.5em;
   padding: 0;
-  overflow:hidden;
-  overflow-wrap:break-word;
+  background-color: var(--background);
+  overflow: hidden;
+  overflow-wrap: break-word;
 }
-h1 {margin: 1.5em 0 1em 0}
+
+h1 {
+  margin: 1.5em 0 1em 0
+}
+
 header {
   margin: 1.5em 0 1.5em 0
 }

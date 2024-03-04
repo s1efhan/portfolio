@@ -1,6 +1,6 @@
 {
   "resources/css/style.scss": {
-    "file": "assets/style-Duxo25Md.css",
+    "file": "assets/style-BC3EGUri.css",
     "src": "resources/css/style.scss",
     "isEntry": true
   },
@@ -17,11 +17,18 @@
     "src": "resources/fonts/Nohemi/Nohemi-Thin.ttf"
   },
   "resources/js/app.js": {
-    "file": "assets/app-DAE6kfQI.js",
+    "file": "assets/app-C7jL6QUX.js",
     "src": "resources/js/app.js",
     "isEntry": true,
     "css": [
       "assets/app-hEpI-9Tf.css"
+    ],
+    "assets": [
+      "assets/404-BgsDAYbR.png"
     ]
+  },
+  "storage/app/public/images/404.png": {
+    "file": "assets/404-BgsDAYbR.png",
+    "src": "storage/app/public/images/404.png"
   }
 }

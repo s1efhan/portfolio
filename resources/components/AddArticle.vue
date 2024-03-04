@@ -97,7 +97,7 @@ export default {
             legendArticle: '',
             legendCategory: '',
             legendTopic: '',
-            legendStyle: 'color: var(--primary-color);',
+            legendStyle: 'color: var(--primary);',
             legend: ''
         };
     },
@@ -152,12 +152,12 @@ export default {
 
             // Fehlermeldung anzeigen
             this.legendArticle = errorMessage;
-            this.legendStyle = 'color: var(--primary-color);';
+            this.legendStyle = 'color: var(--primary);';
             this.fetchArticleTitles();
         } else {
             // Wenn ein anderer Fehler auftritt, allgemeine Fehlermeldung anzeigen
             this.legendArticle = 'Ein Fehler ist aufgetreten. Bitte versuchen Sie es erneut.';
-            this.legendStyle = 'color: var(--primary-color);';
+            this.legendStyle = 'color: var(--primary);';
         }
     });
 }, fetchArticleTitles() {
@@ -177,6 +177,7 @@ export default {
         fetchCategories() {
             axios.get('/knowledge_categories')
                 .then(response => {
+                    console.log("fetch_categories", response.data)
                     this.knowledge_categories = response.data;
                     if (this.knowledge_categories.length > 0) {
                         this.knowledge_category_id = this.knowledge_categories[0].id;
@@ -209,7 +210,7 @@ export default {
                 })
                 .catch(error => {
                     this.legendTopic = error.response.data.error
-                    this.legendStyle = 'color: var(--primary-color);';
+                    this.legendStyle = 'color: var(--primary);';
                 });
         },
         addKnowledgeCategory() {
@@ -225,7 +226,7 @@ export default {
                 })
                 .catch(error => {
                     this.legendCategory = error.response.data.error
-                    this.legendStyle = 'color: var(--primary-color);';
+                    this.legendStyle = 'color: var(--primary);';
                 });
         }
     }

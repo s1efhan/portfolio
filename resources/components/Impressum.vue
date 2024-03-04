@@ -1,7 +1,6 @@
 //Impressum.vue   auf URL /impressum
 
 <template>
-    <main class="impressum">
 <h1>Impressum</h1>
 <section>
 <p>Nach § 5 TMG</p>
@@ -15,5 +14,4 @@
     <p>In den Kronprinzengärten 15</p>
     <p>52066 Aachen</p>
 </section>
-    </main>
 </template>

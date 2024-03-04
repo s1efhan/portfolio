@@ -14,6 +14,7 @@ import Sitemap from './components/Sitemap.vue';
 import Lebenslauf from './components/Lebenslauf.vue';
 import Projekte from './components/Projekte.vue';
 import Login from './components/Login.vue';
+import Test from './components/Test.vue';
 // Refs für den Zustand der App
 const isDarkMode = ref(false);
 
@@ -59,6 +60,9 @@ onMounted(() => {
   </main>
   <main v-else-if="$route.path === '/projekte'">
     <Projekte></Projekte>
+  </main>
+  <main v-else-if="$route.path === '/test'">
+    <Test></Test>
   </main>
 <main v-else="">
   <NichtGefunden></NichtGefunden>
