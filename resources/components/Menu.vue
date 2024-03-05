@@ -29,7 +29,8 @@
 </svg>
 </label>
        </li>
-       <li><a href="/login" class="invisible">Login
+       <li v-if= "userData" class="invisible login" @click="logout">Abmelden</li>
+       <li v-else= "!userData" ><a href="/login" class="invisible login">Anmelden
           </a></li>
         <li @click="toggleHamburger" class="invisible">
           <a href="/">Stefan Theißen
@@ -48,12 +49,31 @@
         </button></a></li>
       </ul>
     </nav>
+    
 </template>
   
 <script setup>
+import axios from 'axios';
+import { defineProps } from 'vue';
+const props = defineProps({
+  userData: Object // Annahme: userData ist ein Objekt, das als Prop übergeben wird
+});
 const search = () => {
   console.log("search noch nicht implementiert")
 }
+const logout = () => {
+  axios.post('/logout')
+    .then(response => {
+        console.log("erfolgreich abgemeldet");
+        window.location.href = '/';
+    })
+    .catch(error =>{
+      console.error("Ausloggen fehlgeschlagen:", error);
+    });
+}
+
+
+
     const toggleHamburger = () => {
   const invisibleElements = document.querySelectorAll('.invisible');
   const visibleElements = document.querySelectorAll('.visible');

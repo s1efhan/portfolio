@@ -64,6 +64,9 @@ nav ul li {
   flex-direction: column;
   width: 75%;
   font-size: 1.5em;
+  .login{
+    color: var(--accent);
+  }
 
   .nav-cta {
     justify-content: center;

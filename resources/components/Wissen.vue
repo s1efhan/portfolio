@@ -1,6 +1,5 @@
 <template>
     <div>
-        <h1>Wissen</h1>
         <section class="blog">
             <table>
                 <thead>
@@ -16,8 +15,9 @@
                     <tr v-for="article in articles" :key="article.id">
                         <td v-if="!article.title_img">
                             <img src="/storage/app/public/images/404.png" alt="Standardbild">
-                        </td>  <td v-else> <img
-                                :src="article.title_img" alt="Bild des Artikels">
+                        </td>  
+                        <td v-else> 
+                            <img :src="article.title_img" alt="Bild des Artikels">
                         </td>
                         <td>{{ article.description }}</td>
                         <td>{{ article.length }} Wörter</td>
@@ -28,48 +28,41 @@
                 </tbody>
             </table>
         </section>
-        <AddArticle @fetchArticleTitles="fetchArticleTitles"></AddArticle>
+
+        <AddArticle v-if ="userData && userData.email === 'stefan.theissen@mail.de'" @fetchArticleTitles="fetchArticleTitles"></AddArticle>
     </div>
 </template>
 
-<script>
-import Breadcrumps from './Breadcrumps.vue';
-import AddArticle from './AddArticle.vue';
+<script setup>
 import axios from 'axios';
+import {onMounted} from 'vue';
+import {ref} from 'vue';
+import AddArticle from './AddArticle.vue';
+import { defineProps } from 'vue';
+const props = defineProps({
+  userData: Object // Annahme: userData ist ein Objekt, das als Prop übergeben wird
+});
+const articles = ref([]);
 
-export default {
-    components: {
-        AddArticle,
-        Breadcrumps,
-    },
-    data() {
-        return {
-            articles: [],
-        };
-    },
-    mounted() {
-        this.fetchArticleTitles();
-    },
-    methods: {
-        formatDate(dateString) {
-            const options = { day: '2-digit', month: 'long', year: 'numeric' };
-            const date = new Date(dateString);
-            return date.toLocaleDateString('de-DE', options);
-        },
-        fetchArticleTitles() {
-            axios.get('/articles')
-                .then(response => {
-                    // Setzen Sie errorMessage auf den Fehlermeldungstext oder ähnliches
-                    this.articles = response.data;
+onMounted(() => {
+    fetchArticleTitles();
+});
 
-                    console.log('Artikel erfolgreich abgerufen:', response.data);
-                })
-                .catch(error => {
-                    console.error('Fehler beim Abrufen der Artikel:', error);
-                    // Setzen Sie errorMessage auf den Fehlerobjekt oder eine benutzerdefinierte Fehlermeldung
-                    this.errorMessage = error.response.data || 'Netzwerkfehler';
-                });
-        }
-    }
+const formatDate = (dateString) => {
+    const options = { day: '2-digit', month: 'long', year: 'numeric' };
+    const date = new Date(dateString);
+    return date.toLocaleDateString('de-DE', options);
+}
+
+const fetchArticleTitles = () => {
+    axios.get('/articles')
+        .then(response => {
+            articles.value = response.data;
+            console.log('Artikel erfolgreich abgerufen:', response.data);
+        })
+        .catch(error => {
+            console.error('Fehler beim Abrufen der Artikel:', error);
+            // Behandlung von Fehlern hier
+        });
 }
 </script>

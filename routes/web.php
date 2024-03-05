@@ -5,11 +5,12 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route; 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\SessionController;
+
+
+Route::post('/logout', [AuthController::class, 'logout']);
 
 Route::get('/knowledge_categories', [ArticleController::class, 'fetch_categories']);
 Route::post('/login', [AuthController::class, 'login']);
-Route::post('/logout', [AuthController::class, 'logout']);
 Route::post('/register', [AuthController::class, 'register']);
 Route::get('/users', [UserController::class, 'index']);
 Route::get('/knowledge_categories', [ArticleController::class, 'fetch_categories']);
@@ -18,7 +19,7 @@ Route::post('/knowledge_topic', [ArticleController::class, 'add_topic']);
 Route::get('/knowledge_topic', [ArticleController::class, 'fetch_topics']);
 Route::post('/addArticle', [ArticleController::class, 'addArticle']);
 Route::get('/get-image-url/{imageName}', [ArticleController::class, 'getImg']);
-Route::get('/session', [SessionController::class, 'fetchSession']);
+Route::get('/userStatus', [AuthController::class, 'fetch_userStatus']);
 Route::post('/contact', [ContactController::class, 'sendEmail']);
 Route::post('/cv-download', [ContactController::class, 'cvDownload']);
 Route::get('/lebenslauf/send', [ContactController::class, 'sendCv'])->name('lebenslauf.send');
@@ -30,4 +31,4 @@ Route::get('/{any}', function () {
 });
 Route::get('/', function () {
     return view('app');
-});
+})->name('home');

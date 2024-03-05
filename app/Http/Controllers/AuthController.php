@@ -7,9 +7,22 @@ use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Log;
 
 class AuthController extends Controller
 {
+
+    public function fetch_userStatus()
+    {
+        if(session('user')){
+            $user = session('user');
+            return response()->json([
+                'user' => $user,
+                'message' => 'Nutzer ist angemeldet als ' . $user->name
+            ], 200);
+        } 
+    }
+    
 
     public function login(Request $request)
     {
@@ -21,10 +34,9 @@ class AuthController extends Controller
     
             // Überprüfen, ob die E-Mail bereits verifiziert wurde
             if ($user->email_verified_at) {
-                session(['logged_in' => true]); // Anmeldestatus in die Session schreiben
-                session(['user_id' => $user->id]); // user_id in die Session schreiben
-                session(['user_name' => $user->name]); 
-                return response()->json(['message' => 'Erfolgreich angemeldet'], 200);
+                session(['user' => $user]);
+                return view('app')->with('success', 'Erfolgreich angemeldet');
+                
             } else {
                 // Wenn die E-Mail nicht verifiziert ist, senden Sie eine neue Verifizierungsmail
                 $emailVerifyToken = $user->email_verify_token;
@@ -44,14 +56,27 @@ class AuthController extends Controller
     
         return response()->json(['message' => 'Ungültige Anmeldeinformationen'], 401);
     }
-    
     public function logout(Request $request)
-    {
-        session(['logged_in' => false]); // Anmeldestatus in die Session schreiben
-        session(['user_id' => ""]); // user_id in die Session schreiben
-        session(['user_name' =>  ""]); 
-        return response()->json(['message' => 'Erfolgreich abgemeldet'], 200);
+{
+    try {
+        Auth::logout();
+
+        // Optional: Entfernen Sie alle Sitzungsdaten
+        $request->session()->flush();
+
+        // Optional: Regenerieren Sie die Sitzungs-ID, um Session Fixation-Angriffe zu vermeiden
+        $request->session()->regenerate();
+
+        // Rückgabe der Ansicht "app" nach erfolgreichem Logout
+        return view('app')->with('success', 'Erfolgreich ausgeloggt');
+    } catch (\Exception $e) {
+        // Fehler beim Ausloggen behandeln
+        return response()->json(['message' => 'Fehler beim Ausloggen'], 500);
     }
+}
+
+    
+    
     
     public function register(Request $request)
     {

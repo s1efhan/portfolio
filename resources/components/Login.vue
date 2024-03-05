@@ -15,55 +15,46 @@
 import axios from 'axios';
 
 export default {
+    emits: ['login'],
     data() {
         return {
             errorMessage: '',
             email: '',
             password: '',
-            errorStyle: ''
+            errorStyle: 'color: var(--text);',
+            user:''
         };
     },
     methods: {
         login() {
-            axios.post('/login', {
-                email: this.email,
-                password: this.password
-            })
-            .then(response => {
-                this.handleResponse(response);
-                this.errorMessage = ''; // Leere Fehlermeldung
-            })
-            .catch(error => {
-                this.handleErrorResponse(error);
-            });
-        },
+    axios.post('/login', {
+        email: this.email,
+        password: this.password
+    })
+    .then(response => {
+        this.user = response.data.user;
+        setTimeout(() => {
+          window.location.href = '/';
+        }, 1000); // 5000 Millisekunden entsprechen 5 Sekunden
+        this.$emit('login', this.user); // 'login' Ereignis emittieren und user Daten übergeben
+        this.errorMessage = 'erfolgreich angemeldet'; // Leere Fehlermeldung
+    })
+    .catch(error => {
+        this.errorMessage = 'Anmeldung fehlgeschlagen';
+        console.log(error);
+    });
+},
         register() {
             axios.post('/register', {
                 email: this.email,
                 password: this.password
             })
             .then(response => {
-                this.handleResponse(response);
-                this.errorMessage = ''; // Leere Fehlermeldung
+                console.log(response);
             })
             .catch(error => {
-                this.handleErrorResponse(error);
-            });
-        },
-        handleResponse(response) {
-            // Setze die Nachricht aus der Antwort in das errorMessage Attribut
-            this.errorMessage = response.data.message;
-            // Setze den errorStyle zurück
-            this.errorStyle = '';
-            // Emittiere das 'login-success'-Event, wenn erforderlich
-            this.$emit('login-success');
-        },
-        handleErrorResponse(error) {
-            // Setze die Fehlermeldung aus der Fehlerantwort in das errorMessage Attribut
-            this.errorMessage = error.response.data.message;
-            // Setze den errorStyle entsprechend
-            this.errorStyle = 'color: var(--primary);';
-        }
+                console.log(error)
+            });},
     }
 };
 </script>
