@@ -39,10 +39,6 @@
 import axios from 'axios';
 import {onMounted} from 'vue';
 import {ref} from 'vue';
-<script setup>
-import axios from 'axios';
-import {onMounted} from 'vue';
-import {ref} from 'vue';
 import AddArticle from './AddArticle.vue';
 import { defineProps } from 'vue';
 const props = defineProps({
@@ -69,33 +65,6 @@ const fetchArticleTitles = () => {
         .catch(error => {
             console.error('Fehler beim Abrufen der Artikel:', error);
             // Behandlung von Fehlern hier
-        });
-import { defineProps } from 'vue';
-const props = defineProps({
-  userData: Object // Annahme: userData ist ein Objekt, das als Prop übergeben wird
-});
-const articles = ref([]);
-
-onMounted(() => {
-    fetchArticleTitles();
-});
-
-const formatDate = (dateString) => {
-    const options = { day: '2-digit', month: 'long', year: 'numeric' };
-    const date = new Date(dateString);
-    return date.toLocaleDateString('de-DE', options);
-}
-
-const fetchArticleTitles = () => {
-    axios.get('/articles')
-        .then(response => {
-            articles.value = response.data;
-            console.log('Artikel erfolgreich abgerufen:', response.data);
-        })
-        .catch(error => {
-            console.error('Fehler beim Abrufen der Artikel:', error);
-            // Behandlung von Fehlern hier
-        });
-}
+        });}
 </script>
 

@@ -15,7 +15,6 @@ import { useRoute } from 'vue-router';
 
 const isDarkMode = ref(false);
 const userData = ref(null);
-const userData = ref(null);
 // Funktion zum Umschalten zwischen Lightmode und Darkmode
 function toggleDarkMode() {
   isDarkMode.value = !isDarkMode.value;

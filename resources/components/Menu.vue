@@ -59,11 +59,6 @@ import { defineProps } from 'vue';
 const props = defineProps({
   userData: Object // Annahme: userData ist ein Objekt, das als Prop übergeben wird
 });
-import axios from 'axios';
-import { defineProps } from 'vue';
-const props = defineProps({
-  userData: Object // Annahme: userData ist ein Objekt, das als Prop übergeben wird
-});
 const search = () => {
   console.log("search noch nicht implementiert")
 }
@@ -77,21 +72,6 @@ const logout = () => {
       console.error("Ausloggen fehlgeschlagen:", error);
     });
 }
-
-
-
-const logout = () => {
-  axios.post('/logout')
-    .then(response => {
-        console.log("erfolgreich abgemeldet");
-        window.location.href = '/';
-    })
-    .catch(error =>{
-      console.error("Ausloggen fehlgeschlagen:", error);
-    });
-}
-
-
 
     const toggleHamburger = () => {
   const invisibleElements = document.querySelectorAll('.invisible');
