@@ -1,4 +1,5 @@
 <template>
+    <main>
     <h1>Login</h1>
     <form class="login-form" @submit.prevent="login">
         <label for="email">Email:</label>
@@ -9,6 +10,7 @@
         <button class="secondary-button" type="button" @click="register">Registrieren</button>
         <p :style="errorStyle">{{ errorMessage }}</p>
     </form>
+</main>
 </template>
 
 <script>

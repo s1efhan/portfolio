@@ -16,6 +16,7 @@ class KnowledgeArticle extends Model
         'topic_id',
         'content',
         'length',
+        'article_url',
         'title_img', // Füge das Attribut title_img hinzu
     ];
 }

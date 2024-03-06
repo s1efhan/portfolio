@@ -14,7 +14,7 @@
   
   
   <script>
-  
+import { useRoute, useRouter } from 'vue-router';
   export default {
     data() {
       return {
@@ -26,6 +26,7 @@
     },
     methods: {
   categorizeRoutes() {
+    const router = useRouter();
     router.options.routes.forEach(route => {
       if (route.path !== "/") {
         const pathParts = route.path.split('/').filter(part => part !== '');

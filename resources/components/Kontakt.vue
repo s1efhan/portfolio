@@ -1,4 +1,5 @@
 <template>
+  <main>
       <h1>Kontakt</h1>
       <form @submit.prevent="submitForm">
         <label for="name">Name:</label>
@@ -9,6 +10,8 @@
         <label for="topic">Thema:</label>
       <select id="topic" v-model="formData.thema" required>
         <option value="">Bitte wählen</option>
+        <option value="Sonstiges">Datenschutz</option>
+        <option value="Sonstiges">Fehler gefunden?</option>
         <option value="Sonstiges">Sonstiges</option>
         <!-- Weitere Optionen können hier hinzugefügt werden -->
       </select>
@@ -17,6 +20,7 @@
   
         <button class="secondary-button" type="submit">Absenden</button>
       </form>
+    </main>
   </template>
   
   <script>

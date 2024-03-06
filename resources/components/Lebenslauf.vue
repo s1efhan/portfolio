@@ -1,4 +1,5 @@
 <template>
+    <main>
                 <h1>Lebenslauf Download</h1>
     <form  @submit.prevent="csvDownload">
         <label for="email">E-Mail:</label>
@@ -21,6 +22,7 @@
         <button class= "primary_button_full" type="submit" name="submit">Download</button>
         <p :style="fieldsetStyle">{{ errorMessage }}</p>
   </form>
+</main>
 </template>
 <script>
 import axios from 'axios';

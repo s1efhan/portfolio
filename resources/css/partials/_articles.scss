@@ -1,0 +1,17 @@
+.article_title_bereich {
+    margin-top: 10vh;
+    width: 100%;
+    display:block;
+overflow: hidden;
+    .title_img  {
+        width: 100%;
+    }
+}
+
+.article_inhalt {
+    display:block;
+    img {
+        max-width: 100vw;
+        height: fit-content
+    }
+}

@@ -1,8 +1,9 @@
 <template>
     <ul>
+      <li>Lol</li>
       <!-- Dynamisch generierte Breadcrumb-Links -->
       <li v-for="(crumb, index) in breadcrumbs" :key="index">
-        <router-link :to="crumb.route">{{ crumb.label }}</router-link>
+        <a :href="crumb.route">{{ crumb.label }}</a>
       </li>
     </ul>
   </template>

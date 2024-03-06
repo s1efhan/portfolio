@@ -58,15 +58,16 @@ nav ul {
 nav ul li {
   width: fit-content;
 }
-
+.login{
+  color: var(--accent);
+  padding: 1em;
+  position: absolute;
+}
 .nav-links {
   margin: 0 auto;
   flex-direction: column;
   width: 75%;
-  font-size: 1.5em;
-  .login{
-    color: var(--accent);
-  }
+  font-size: 1.2em;
 
   .nav-cta {
     justify-content: center;

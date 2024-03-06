@@ -9,8 +9,10 @@ import '@vueup/vue-quill/dist/vue-quill.snow.css';
         <div class="form-container">
             <form class="addArticle-form" @submit.prevent="addArticle">
                 <legend :style="legendStyle" v-html="legendArticle"></legend>
-                <label for="description">Meta Title:</label>
+                <label for="title">Meta Title:</label>
                 <input id="title" type="text" v-model="title" placeholder="Max. 60 characters">
+                <label for="article_url">Url: </label>
+                <input id="article_url" type="text" v-model="article_url" placeholder="z.B /article-name">
                 <label for="description">Meta Description:</label>
                 <input id="description" type="text" v-model="description" placeholder="Max. 160 characters">
                 <label for="author">Author:</label>
@@ -74,7 +76,9 @@ import '@vueup/vue-quill/dist/vue-quill.snow.css';
 import axios from 'axios';
 
 export default {
+    
     data() {
+        
         return {
             toolbarOptions: [
                 [{ 'header': [2, 3, 4, false] },'bold', 'italic', 'underline'],
@@ -92,6 +96,7 @@ export default {
             knowledge_category_id: '',
             knowledge_categories: [],
             knowledge_topics: [],
+            article_url: '',
             knowledge_category_name: '',
             nav_item: '',
             legendArticle: '',
@@ -101,8 +106,13 @@ export default {
             legend: ''
         };
     },
+    watch: {
+        title(newTitle) {
+            // Aktualisiere article_url basierend auf dem neuen Titel
+            this.article_url = '/' + newTitle.toLowerCase().replace(/\s+/g, '-');
+        }},
     emits: ['fetchArticleTitles'],
-    mounted() {
+        mounted() {
         this.fetchUsers();
         this.fetchCategories();
         this.fetchTopics();
@@ -118,8 +128,9 @@ export default {
     addArticle() {
     // Erstellen Sie ein FormData-Objekt
     let formData = new FormData();
-
+console.log(this.article_url);
     // Fügen Sie die Formulardaten hinzu
+    formData.append('article_url', this.article_url);
     formData.append('title', this.title);
     formData.append('description', this.description);
     formData.append('author', this.author);
