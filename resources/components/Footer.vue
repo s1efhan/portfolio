@@ -2,9 +2,9 @@
 <template>
     <footer>
 <ul>
-    <li> <a href = "/impressum">Impressum</a></li>
-    <li> <a href = "/datenschutz">Datenschutz</a></li>
-    <li> <a href = "/sitemap">Sitemap</a></li>
+    <li> <router-link to= "/impressum">Impressum</router-link ></li>
+    <li> <router-link to= "/datenschutz">Datenschutz</router-link ></li>
+    <li> <router-link to= "/sitemap">Sitemap</router-link ></li>
 </ul>
 </footer>
 </template>

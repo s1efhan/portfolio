@@ -4,6 +4,7 @@ import { QuillEditor } from '@vueup/vue-quill'
 import '@vueup/vue-quill/dist/vue-quill.snow.css';
 </script>
 <template>
+    <main>
     <section class="addArticle">
         <h2>Artikel hinzufügen</h2>
         <div class="form-container">
@@ -70,6 +71,7 @@ import '@vueup/vue-quill/dist/vue-quill.snow.css';
             </form>
         </div>
     </section>
+</main>
 </template>
 
 <script>

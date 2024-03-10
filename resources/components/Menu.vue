@@ -1,7 +1,7 @@
 <template>
     <nav>
       <ul> <li v-if= "userData" class="invisible login" @click="logout">Abmelden</li>
-       <li v-else= "!userData" ><router-link to="/login" class="invisible login">Anmelden
+       <li v-else= "!userData" ><router-link to="/login" @click="toggleHamburger" class="invisible login">Anmelden
           </router-link></li></ul>
       <ul class="toggleHamburger">
         <li @click="toggleHamburger" class="visible"><svg xmlns="http://www.w3.org/2000/svg"
@@ -53,43 +53,48 @@
     
 </template>
   
-<script setup>
+<script>
 import axios from 'axios';
-import { defineProps } from 'vue';
-const props = defineProps({
-  userData: Object // Annahme: userData ist ein Objekt, das als Prop übergeben wird
-});
-const search = () => {
-  console.log("search noch nicht implementiert")
+
+export default {
+  props: {
+    userData: Object,
+  },
+  methods: {
+    search() {
+      console.log("Suche ist noch nicht implementiert")
+    },
+    logout() {
+      axios.post('/logout')
+        .then(response => {
+          console.log("Erfolgreich abgemeldet");
+          this.toggleHamburger();
+          this.$emit('update:user-data', null);
+        })
+        .catch(error => {
+          console.error("Ausloggen fehlgeschlagen:", error);
+        });
+    },
+    toggleHamburger() {
+      const invisibleElements = document.querySelectorAll('.invisible');
+      const visibleElements = document.querySelectorAll('.visible');
+
+      // Sichtbarkeit der Elemente mit Klasse "invisible" umschalten
+      invisibleElements.forEach(element => {
+        element.classList.remove('invisible');
+        element.classList.add('visible');
+      });
+
+      // Sichtbarkeit der Elemente mit Klasse "visible" umschalten
+      visibleElements.forEach(element => {
+        element.classList.remove('visible');
+        element.classList.add('invisible');
+      });
+
+      // Hintergrundklasse für das Hamburger-Element umschalten
+      const hamburger = document.querySelector('nav');
+      hamburger.classList.toggle('backgroundOn');
+    }
+  }
 }
-const logout = () => {
-  axios.post('/logout')
-    .then(response => {
-        console.log("erfolgreich abgemeldet");
-        window.location.href = '/';
-    })
-    .catch(error =>{
-      console.error("Ausloggen fehlgeschlagen:", error);
-    });
-}
-
-    const toggleHamburger = () => {
-  const invisibleElements = document.querySelectorAll('.invisible');
-  const visibleElements = document.querySelectorAll('.visible');
-
-  // Toggle visibility for elements with class invisible
-  invisibleElements.forEach(element => {
-    element.classList.remove('invisible');
-    element.classList.add('visible');
-  });
-
-  // Toggle visibility for elements with class visible
-  visibleElements.forEach(element => {
-    element.classList.remove('visible');
-    element.classList.add('invisible');
-  });
-  // Toggle background class for hamburger element
-  const hamburger = document.querySelector('nav');
-  hamburger.classList.toggle('backgroundOn');
-};
 </script>

@@ -1,53 +1,70 @@
 <template>
-<main>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Beschreibung</th>
-                        <th>Länge</th>
-                        <th>Erstellt am</th>
-                        <th>Thema ID</th>
-                        <th>Autor</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr v-for="article in articles" :key="article.id">
-                        <router-link :to="article.article_url">
-                        <td v-if="!article.title_img">
-                            <img src="/storage/app/public/images/404.png" alt="Standardbild">
-                        </td>  
-                        <td v-else> 
-                            <img :src="article.title_img" alt="Bild des Artikels">
-                        </td>  
-                        <td v-else> 
-                            <img :src="article.title_img" alt="Bild des Artikels">
-                        </td>
-                        <td>{{ article.description }}</td>
-                        <td>{{ article.length }} Wörter</td>
-                        <td>{{ formatDate(article.created_at) }}</td>
-                        <td>{{ article.topic_id }}</td>
-                        <td>{{ article.author }}</td>
-                    </router-link>
-                    </tr>
-                </tbody>
-            </table>
-        <AddArticle v-if ="userData && userData.email === 'stefan.theissen@mail.de'" @fetchArticleTitles="fetchArticleTitles"></AddArticle>
+    <main>
+        <table >
+            <thead>
+                <tr>
+                    <th>Beschreibung</th>
+                    <th>Länge</th>
+                    <th>Erstellt am</th>
+                    <th>Thema ID</th>
+                    <th>Autor</th>
+                </tr>
+            </thead>
+            <tbody>
+    <tr v-if="userData && userData.email === 'stefan.theissen@mail.de'" v-for="article in articles" :key="'admin-' + article.id">
+        <router-link :to="article.article_url">
+            <td v-if="!article.title_img">
+                <img src="/storage/app/public/images/404.png" alt="Standardbild">
+            </td>
+            <td v-else>
+                <img :src="article.title_img" alt="Bild des Artikels">
+            </td>
+            <td>{{ article.description }}</td>
+            <td>{{ article.length }} Wörter</td>
+            <td>{{ formatDate(article.created_at) }}</td>
+            <td>{{ article.topic_id }}</td>
+            <td>{{ article.author }}</td>
+        </router-link>
+    </tr>
+    <tr v-else v-for="article in publicArticles" :key="'public-' + article.id">
+        <router-link :to="article.article_url">
+            <td v-if="!article.title_img">
+                <img src="/storage/app/public/images/404.png" alt="Standardbild">
+            </td>
+            <td v-else>
+                <img :src="article.title_img" alt="Bild des Artikels">
+            </td>
+            <td>{{ article.description }}</td>
+            <td>{{ article.length }} Wörter</td>
+            <td>{{ formatDate(article.created_at) }}</td>
+            <td>{{ article.topic_id }}</td>
+            <td>{{ article.author }}</td>
+        </router-link>
+    </tr>
+</tbody>
+
+        </table>
+        <AddArticle v-if="userData && userData.email === 'stefan.theissen@mail.de'"
+            @fetchArticleTitles="fetchArticleTitles"></AddArticle>
     </main>
 </template>
 
 <script setup>
 import axios from 'axios';
-import {onMounted} from 'vue';
-import {ref} from 'vue';
+import { onMounted } from 'vue';
+import { ref, computed } from 'vue';
 import AddArticle from './AddArticle.vue';
 import { defineProps } from 'vue';
 const props = defineProps({
-  userData: Object // Annahme: userData ist ein Objekt, das als Prop übergeben wird
+    userData: Object // Annahme: userData ist ein Objekt, das als Prop übergeben wird
+});
+onMounted(() => {
+    fetchArticleTitles();
 });
 const articles = ref([]);
 
-onMounted(() => {
-    fetchArticleTitles();
+const publicArticles = computed(() => {
+    return articles.value.filter(article => article.status === 'public');
 });
 
 const formatDate = (dateString) => {
@@ -65,6 +82,6 @@ const fetchArticleTitles = () => {
         .catch(error => {
             console.error('Fehler beim Abrufen der Artikel:', error);
             // Behandlung von Fehlern hier
-        });}
+        });
+}
 </script>
-

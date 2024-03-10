@@ -30,8 +30,14 @@ const downloadPdf = (article_id) => {
     axios.get('/downloadArticle', {
         params: {
             article_id: article_id
-        }
+        },responseType: 'blob'
     }).then(response => {
+        const url = window.URL.createObjectURL(new Blob([response.data]));
+        const link = document.createElement('a');
+        link.href = url;
+        link.setAttribute('download', article.value.title +".pdf");
+        document.body.appendChild(link);
+        link.click();
         console.log('download erfolgreich')
     }).catch(error => {
         console.error('Fehler beim Abrufen des Artikels:', error);

@@ -15,9 +15,10 @@
 
 <script>
 import axios from 'axios';
-
 export default {
-    emits: ['login'],
+    props: {
+    fetchUserData: Function, // Define the prop type as Function
+  },
     data() {
         return {
             errorMessage: '',
@@ -36,9 +37,9 @@ export default {
     .then(response => {
         this.user = response.data.user;
         setTimeout(() => {
-          window.location.href = '/';
-        }, 1000); // 5000 Millisekunden entsprechen 5 Sekunden
-        this.$emit('login', this.user); // 'login' Ereignis emittieren und user Daten übergeben
+          this.$router.go(-1);
+        }, 1500); // 5000 Millisekunden entsprechen 5 Sekunden
+        this.fetchUserData();
         this.errorMessage = 'erfolgreich angemeldet'; // Leere Fehlermeldung
     })
     .catch(error => {
@@ -53,6 +54,7 @@ export default {
             })
             .then(response => {
                 console.log(response);
+                this.login()
             })
             .catch(error => {
                 console.log(error)

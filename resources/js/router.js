@@ -8,6 +8,7 @@ import Lebenslauf from '../components/Lebenslauf.vue';
 import Projekte from '../components/Projekte.vue';
 import Login from '../components/Login.vue';
 import Wissen from '../components/Wissen.vue';
+import NichtGefunden from '../components/NichtGefunden.vue';
 import ArticleView from '../components/ArticleView.vue';
 
 const router = createRouter({
@@ -25,6 +26,7 @@ const router = createRouter({
       { path: '/wissen', component: Wissen, name: 'wissen' },
       { path: '/login', component: Login, name: 'login' },
       { path: '/projekte', component: Projekte, name: 'projekte' },
+      { path: '/:catchAll(.*)', component: NichtGefunden, name: 'nichtgefunden' },
     ],
 });
 
