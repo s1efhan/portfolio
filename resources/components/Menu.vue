@@ -40,7 +40,7 @@
           </RouterLink>
         </li>
        <li @click="toggleHamburger" class="kontakt invisible nav-cta"> <RouterLink to="/kontakt"><button class="primary-button">Kontaktiere mich!</button></RouterLink></li>
-       <li @click="downloadCensoredCv" class="lebenslauf invisible nav-cta"> <RouterLink to="/kontakt"><button class="secondary-button">Download CV!</button></RouterLink></li>
+       <li @click="downloadCensoredCv" class="lebenslauf invisible nav-cta"> <RouterLink to="/lebenslauf"><button class="secondary-button">Download CV!</button></RouterLink></li>
 
       </ul>
     </nav>
