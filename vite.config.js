@@ -4,9 +4,10 @@ import laravel from 'laravel-vite-plugin';
 
 export default defineConfig({
     plugins: [
+        
         vue(),
         laravel({
-            input: ['resources/css/style.scss', 'resources/js/app.js'],
+            input: ['resources/css/style.scss', 'resources/js/app.js', 'resources/css/style2.scss'],
             refresh: true,
         }),
     ],

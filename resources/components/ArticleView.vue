@@ -3,7 +3,7 @@
     <section class="article_title_bereich">
         <img class="title_img" :src="article.title_img" @error="handleImageError">
     <h1>{{ article.title }}</h1>
-    <button @click="downloadPdf">Download PDF</button>
+    <button class="secondary-button"@click="downloadPdf">Download PDF</button>
     </section>
     <section class="article_inhalt" v-html="article.content"></section>
     <!-- Je nach aufgerufener URL dynamisch das HTML aus der Datenbank -->
@@ -16,14 +16,13 @@ import { ref, onMounted } from 'vue';
 import { useRoute } from 'vue-router';
 import axios from 'axios';
 const $route = useRoute(); // $route aus useRoute() holen
-const handleImageError = (event) => {
-    event.target.src = '/storage/images/404.png';
-};
+
 const article = ref([]);
 
 onMounted(() => {
     showArticle();
 });
+
 const downloadPdf = (article_id) => {
     article_id = article.value.id;
     console.log(article_id) // Hier setzen Sie den gewünschten Artikel-URL

@@ -16,11 +16,12 @@ form label {
 }
 
 form {
+  button{margin: 0.5em;}
   display: flex;
   flex-direction: column;
   overflow: hidden;
   align-items: center; 
-  input, button, textarea, select {
+  input, textarea, select {
     border-radius: 6px;
     margin: 1em 0 1em  0;
     border: none;
@@ -32,5 +33,14 @@ form {
   select {text-align: center;}
   textarea {height: 12em; resize: none }
   fieldset {border-radius: 6px; border: solid var(--accent);padding: 1em;}
+}
+.addArticle-form {
+  button{ border-radius: 6px;
+    margin: 1em 0 1em  0;
+    border: none;
+    width: 90%;
+    background-color: var(--accent);
+    color: var(--secondary);
+    font-size: 1em;}
 }
 

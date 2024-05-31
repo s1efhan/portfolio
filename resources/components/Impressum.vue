@@ -1,4 +1,4 @@
-//Impressum.vue   auf URL /impressum
+
 
 <template>
     <main>

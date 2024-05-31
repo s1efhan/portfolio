@@ -1,0 +1,44 @@
+    tbody {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    td {flex: 0 0 50%}
+  }
+
+  th {
+    border: solid;
+  }  
+
+  table {
+    width: 100%;
+    border: solid thin;
+    font-size: 0.7em;
+    border-collapse: collapse;
+  
+    img {
+      width: 100%;
+      height: 100%;
+      border-radius: 90px;
+    }
+  }
+
+
+.onlyDesktop {
+    display: none;
+  }
+  
+  td {
+    padding: 0.5em;
+    border-bottom: solid thin;
+    a,
+    p,
+    ul {
+      margin: 0;
+      padding: 0;
+    }
+  
+    p {
+      text-align: center;
+    }
+  }
+  

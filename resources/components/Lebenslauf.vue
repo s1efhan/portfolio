@@ -1,15 +1,20 @@
 <template>
     <main>
-                <h1>Lebenslauf Download</h1>
+                <h1>Lebenslauf</h1>
+                <div class= "Cv">
+                    <img :src="'storage/images/censoredCv.png'" max-width="100%" height="400px"></img>
+                </div>
+                
     <form  @submit.prevent="csvDownload">
-        <label for="email">E-Mail:</label>
+        <h2>Vollständigen Lebenslauf herunterladen (unzensiert)</h2>
+        <label for="email">Ihre E-Mail Adresse:</label>
         <input type="email" id="email" name="email" v-model="email" required>
-        <label for="name">Name:</label>
+        <label for="name">Ihr Name:</label>
         <input type="text" id="name" name="name" v-model="name">
         
-        <label for="company">Unternehmen:</label>
+        <label for="company">Ihr Unternehmen:</label>
         <input type="text" id="company" name="company" v-model="company">
-        
+        <label for="position">Ihre Position:</label>
         <select id="position" name="position" v-model="selectedPosition">
             <option value="Personaler/HR">Personaler/HR</option>
             <option value="Geschäftsführer">Geschäftsführer</option>
@@ -19,7 +24,7 @@
         </select>
 
         <input type="text" id="anderePosition" name="anderePosition" v-model="anderePosition" v-show="selectedPosition === 'Andere'">
-        <button class= "primary_button_full" type="submit" name="submit">Download</button>
+        <button class= "primary-button" type="submit" name="submit">Lebenslauf Anfragen</button>
         <p :style="fieldsetStyle">{{ errorMessage }}</p>
   </form>
 </main>
