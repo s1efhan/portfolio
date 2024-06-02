@@ -28,7 +28,6 @@ h1 {
     color: var(--text);
   }
 }
-
 .wartungsarbeiten {
   color: var(--background);
   background-color: var(--secondary);
@@ -604,6 +603,7 @@ ul.categories {
 ul.projekte {
   li {
     padding-bottom: 3em;
+    cursor:pointer;
   }
 }
 
@@ -668,7 +668,9 @@ ul.projekte {
       color: var(--secondary)
     }
   }
-
+  .skill a {height: 100%; width: 100%;}
+  .skill.important a { color: var(--background);}
+  .skill.important a:hover { color: var(--text);}
   .skill.important {
     background-color: var(--secondary);
     border-color: var(--secondary);
@@ -680,6 +682,7 @@ ul.projekte {
   }
 
   .skill.important:hover {
+    a { color: var(--text);}
     background-color: var(--accent);
     border-color: var(--accent);
 

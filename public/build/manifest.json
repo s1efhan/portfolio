@@ -1,11 +1,11 @@
 {
   "resources/css/style.scss": {
-    "file": "assets/style-Bv5fVEpf.css",
+    "file": "assets/style-CL_vhwZh.css",
     "src": "resources/css/style.scss",
     "isEntry": true
   },
   "resources/css/style2.scss": {
-    "file": "assets/style2-C79W3FUH.css",
+    "file": "assets/style2-DN9hc-H6.css",
     "src": "resources/css/style2.scss",
     "isEntry": true
   },
@@ -22,7 +22,7 @@
     "src": "resources/fonts/Nohemi/Nohemi-Thin.ttf"
   },
   "resources/js/app.js": {
-    "file": "assets/app-Dttxs7PC.js",
+    "file": "assets/app-C5jm5AGN.js",
     "src": "resources/js/app.js",
     "isEntry": true,
     "css": [

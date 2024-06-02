@@ -27,7 +27,9 @@
 <ul v-if="active_category_id != 0"class="knowledge_categories">
   <li v-for="topic in filteredTopics" :key="topic.id" :class="categories.find((category) => category.id === topic.category_id)?.name">
     <p class="category-icon">
-      <MedienIcon/>
+      <MedienIcon v-if="topic.category_id == 1"/>
+      <SoftwareIcon v-if="topic.category_id == 3"/>
+      <ManagementIcon v-if="topic.category_id == 2"/>
     </p>
     <router-link @click="active_category_id = 0" :to="{ path: topic.topic_url }">
       <h3><component v-if="loadComponent(topic.icon)" :is="loadComponent(topic.icon)"></component></h3>
@@ -35,32 +37,28 @@
     </router-link>
   </li>
 </ul>
-    <table v-if="route.path === '/wissen'">
+    <table class="articleList" v-if="route.path === '/wissen'">
       <tbody>
         <tr v-for="article in articles" :key="`admin-${article.id}`">
+          <router-link :to="article.article_url">
+            <td>
+            <ul><li><SoftwareIcon/></li></ul>
+          </td>
           <td>
-            <router-link :to="article.article_url">
-              <img :src="article.title_img ? `/storage/${article.title_img}` : '/storage/images/404.png'"
-                @error="setDefaultImage" alt="Bild des Artikels" />
-              <p>{{ article.title }}</p>
-            </router-link>
+            <ul>
+              <li>{{ article.topic_name }}</li>
+            </ul>
           </td>
           <td class="onlyDesktop">
-            <router-link :to="article.article_url">{{ article.description }}</router-link>
+           <ul> <li>{{ article.description }}</li></ul>
           </td>
           <td>
-            <router-link :to="article.article_url">
+       
               <ul>
-                <li>{{ article.length }} Wörter</li>
                 <li>{{ formatDate(article.created_at) }}</li>
-                <li>{{ article.topic_name }}</li>
-                <li>{{ article.author_name }}</li>
-                <li>
-                  <img :src="article.author_img" alt="Bild des Autor" />
-                </li>
               </ul>
-            </router-link>
           </td>
+        </router-link>
         </tr>
       </tbody>
     </table>
@@ -193,9 +191,10 @@ const switchAction = () => {
 };
 
 const formatDate = (dateString) => {
-  const options = { day: '2-digit', month: 'long', year: 'numeric' };
   const date = new Date(dateString);
-  return date.toLocaleDateString('de-DE', options);
+  const month = date.toLocaleString('de-DE', { month: 'long' });
+  const year = date.getFullYear().toString(); 
+  return `${month} ${year}`;
 };
 
 const setDefaultImage = (event) => {
